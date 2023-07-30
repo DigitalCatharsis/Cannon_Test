@@ -11,8 +11,6 @@ namespace Cannon_Test
         Walking_2,
     }
 
-
-
     public class CharacterControl : MonoBehaviour
     {
         public TransitionParameter walkingType;

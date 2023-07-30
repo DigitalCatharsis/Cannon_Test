@@ -620,6 +620,10 @@ PrefabInstance:
       propertyPath: isMoving
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5471562890509836823, guid: 001563a1dd9955746b686bb80bbdf247, type: 3}
+      propertyPath: walkingType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8188939624195607832, guid: 001563a1dd9955746b686bb80bbdf247, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
