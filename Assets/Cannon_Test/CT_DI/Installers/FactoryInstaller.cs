@@ -8,8 +8,9 @@ namespace Cannon_Test
     public class FactoryInstaller : MonoInstaller
     {
         [Header("Player spawn")]
-        [SerializeField] private PlayerControl _player;
+        [SerializeField] private PlayerControl _playerControl;
         [SerializeField] private Transform _playerLocation;
+        [SerializeField] private GameObject _projectile;
 
         public override void InstallBindings()
         {
@@ -29,7 +30,7 @@ namespace Cannon_Test
 
         public void BindPlayer()
         {
-            Container.Bind<PlayerControl>().FromComponentInNewPrefab(_player).AsSingle().NonLazy();
+            Container.Bind<PlayerControl>().FromComponentInNewPrefab(_playerControl).AsSingle().NonLazy();
         }
     }
 }

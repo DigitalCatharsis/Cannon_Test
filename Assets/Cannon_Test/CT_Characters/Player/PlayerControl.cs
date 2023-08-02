@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using Zenject;
 
 public class PlayerControl : MonoBehaviour
 {
+
     private Vector3 _screenPosition;
     private Vector3 _worldPosition;
     private GameObject _pointer;
+
 
     private void Start()
     {
@@ -21,13 +24,13 @@ public class PlayerControl : MonoBehaviour
     private void Update()
     {
         ImitatePointer();
-        //RotatePlayerMesh();
+        RotatePlayerMesh();
     }
 
     private void ImitatePointer()
     {
         _screenPosition = Input.mousePosition;
-        _screenPosition.z = Camera.main.nearClipPlane + 1;
+        _screenPosition.z = Camera.main.nearClipPlane + 3;
 
         _worldPosition = Camera.main.ScreenToWorldPoint(_screenPosition);
 
@@ -37,7 +40,12 @@ public class PlayerControl : MonoBehaviour
 
     private void RotatePlayerMesh()
     {
-        this.transform.root.transform.LookAt(_pointer.transform);
+        this.transform.root.LookAt(_pointer.transform);
+    }
+
+    private void Shoot()
+    {
+
     }
 
 }
