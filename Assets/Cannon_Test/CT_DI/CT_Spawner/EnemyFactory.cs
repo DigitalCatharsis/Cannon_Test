@@ -5,6 +5,7 @@ namespace Cannon_Test
 {
     public class EnemyFactory : IEnemyFactory
     {
+        [Inject]
         private DiContainer _diContainer;
 
         private Object _zombieGeneralPrefab;
@@ -13,12 +14,7 @@ namespace Cannon_Test
         private const string _zombieGeneralName = "ZombieElite";
         private const string _zombieEliteName = "ZombieGeneral";
 
-        public EnemyFactory(DiContainer diContainer)
-        {
-            _diContainer = diContainer;
-        }
-
-        public void Load()
+        public EnemyFactory()
         {
             _zombieGeneralPrefab = Resources.Load(_zombieGeneralName) as GameObject;
             _zombieElitePrefab = Resources.Load(_zombieEliteName) as GameObject;

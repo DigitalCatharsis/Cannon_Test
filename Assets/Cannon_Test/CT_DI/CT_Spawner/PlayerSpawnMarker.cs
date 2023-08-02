@@ -2,12 +2,11 @@ using UnityEngine;
 
 namespace Cannon_Test
 {
-    public class EnemySpawnMarker : MonoBehaviour
+    public class PlayerSpawnMarker : MonoBehaviour
     {
-        public EnemyType enemyType;
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.blue;
+            Gizmos.color = Color.magenta;
             Gizmos.DrawSphere(transform.position, 1);
         }
     }
