@@ -1,24 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using Zenject;
 
 public class PlayerControl : MonoBehaviour
 {
-
     private Vector3 _screenPosition;
     private Vector3 _worldPosition;
     private GameObject _pointer;
 
-
     private void Start()
     {
-
         var obj = Resources.Load("JackPointer") as GameObject;
         _pointer = GameObject.Instantiate(obj);
-
     }
 
     private void Update()

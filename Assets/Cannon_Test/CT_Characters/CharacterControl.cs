@@ -17,6 +17,8 @@ namespace Cannon_Test
 
         public bool isMoving;
 
+        public EnemyType enemyType;
+
         public void MoveForward(float speed)
         {
                 transform.Translate(Vector3.forward * speed * Time.deltaTime);

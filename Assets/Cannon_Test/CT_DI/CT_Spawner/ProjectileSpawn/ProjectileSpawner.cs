@@ -3,10 +3,10 @@ using Zenject;
 
 namespace Cannon_Test
 {
-    public class EnemySpawner : MonoBehaviour 
+    public class ProjectileSpawner : MonoBehaviour
     {
         [Inject]
-        private IEnemyFactory _enemyFactory;
+        private ICoreFactory<ProjectileType> _projectyle;
 
         //courutine
         //uniTask?
@@ -14,7 +14,7 @@ namespace Cannon_Test
 
         private void Update()
         {
-            _enemyFactory.Create(GetEnemyType(), GetRandomPosition());
+            _projectyle.InstantiatePrefab(GetProjectileType(), GetRandomPosition());
         }
 
         private Vector3 GetRandomPosition()
@@ -27,9 +27,9 @@ namespace Cannon_Test
         {
             return Random.Range(start, end);
         }
-        private EnemyType GetEnemyType()
+        private ProjectileType GetProjectileType()
         {
-            return (EnemyType)Random.Range(0, System.Enum.GetValues(typeof(EnemyType)).Length);
+            return (ProjectileType)Random.Range(0, System.Enum.GetValues(typeof(ProjectileType)).Length);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -10,7 +11,7 @@ namespace Cannon_Test
         [Header("Player spawn")]
         [SerializeField] private PlayerControl _playerControl;
         [SerializeField] private Transform _playerLocation;
-        [SerializeField] private GameObject _projectile;
+
 
         public override void InstallBindings()
         {
@@ -24,8 +25,8 @@ namespace Cannon_Test
         }
         private void BindEnemySpawn()
         {
-            Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle().NonLazy();
-            Container.Bind<EnemySpawner>().FromComponentInHierarchy().AsSingle().NonLazy();
+            Container.Bind<ICoreFactory<EnemyType>>().To<EnemyFactory>().AsSingle().NonLazy();
+            Container.Bind<EnemySpawner>().FromComponentInHierarchy().AsSingle().NonLazy();            
         }
 
         public void BindPlayer()
