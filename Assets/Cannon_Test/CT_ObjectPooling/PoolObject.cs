@@ -1,28 +1,27 @@
-using System.Collections.Generic;
-using System;
 using UnityEngine;
-using System.Runtime.InteropServices;
+using Zenject;
 
 namespace Cannon_Test
 {
     public class PoolObject: MonoBehaviour
     {
-        public Enum poolObjectType;
+        [Inject] private PoolManager _poolManager;
+        [Inject] private EnemySpawner _spawner;
 
-        private void Awake()
+        public EnemyType poolObjectType;
+        public void GotKilled()
         {
-            if (this.gameObject.GetComponent<CharacterControl>() != null)
+            if (!_poolManager.enemyPoolDictionary[poolObjectType].Contains(this.gameObject))
             {
-                poolObjectType = (this.gameObject.GetComponent<CharacterControl>()).enemyType;
+                TurnOff();
             }
-            else if (this.gameObject.GetComponent<ProjectileControl>() == null)
-            {
-                poolObjectType = (this.gameObject.GetComponent<ProjectileControl>()).projectileType;
-            }
-            else
-            {
-                throw new Exception("poolObjectType is null");
-            }            
         }
+        public void TurnOff()
+        {
+            this.transform.position = _spawner.GetRandomPosition();
+
+            _poolManager.AddObject(this);
+        }
+
     }
 }

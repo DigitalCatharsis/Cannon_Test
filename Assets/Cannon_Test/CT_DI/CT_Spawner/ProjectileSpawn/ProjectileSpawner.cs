@@ -14,7 +14,7 @@ namespace Cannon_Test
 
         private void Update()
         {
-            _projectyle.InstantiatePrefab(GetProjectileType(), GetRandomPosition());
+            //_projectyle.CreatePrefab(GetProjectileType(), GetRandomPosition());
         }
 
         private Vector3 GetRandomPosition()

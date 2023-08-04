@@ -7,6 +7,5 @@ namespace Cannon_Test
     public class ProjectileControl : MonoBehaviour
     {
         public ProjectileType projectileType;
-
     }
 }

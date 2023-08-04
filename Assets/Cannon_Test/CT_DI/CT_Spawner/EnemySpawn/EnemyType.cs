@@ -2,5 +2,4 @@
     {
         ZOMBIE_GENERAL,
         ZOMBIE_ELITE,
-        POWERUP,
     }
