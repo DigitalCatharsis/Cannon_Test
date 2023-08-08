@@ -18,30 +18,26 @@ namespace Cannon_Test
         {
             BindInstallerInterfaces();
             BindPlayer();
-            BindEnemySpawn();
-            BindPoolingSystem();
+            BindSpawn();
         }
-
-        private void BindPoolingSystem()
-        {
-            Container.Bind<PoolObjectLoader>().AsSingle().NonLazy();
-            Container.Bind<PoolManager>().FromComponentInNewPrefab(_poolManager).AsSingle().NonLazy();
-        }
-
         private void BindInstallerInterfaces()
         {
             Container.BindInterfacesTo<GameInstaller>().FromInstance(this).AsSingle().NonLazy();
         }
 
-        private void BindEnemySpawn()
-        {
-            Container.Bind<ICoreFactory<EnemyType>>().To<EnemyFactory>().AsSingle().NonLazy();
-            Container.Bind<EnemySpawner>().FromComponentInHierarchy().AsSingle().NonLazy();            
-        }
-
         public void BindPlayer()
         {
             Container.Bind<PlayerControl>().FromComponentInNewPrefab(_playerControl).AsSingle().NonLazy();
+        }
+        private void BindSpawn()
+        {
+            Container.Bind<PoolManager>().FromComponentInNewPrefab(_poolManager).AsSingle().NonLazy();
+            Container.Bind<PoolObjectLoader>().AsSingle().NonLazy();
+
+            Container.Bind<ICoreFactory<EnemyType>>().To<EnemyFactory>().AsSingle().NonLazy();
+            Container.Bind<ICoreFactory<PowerUpType>>().To<ProjectileFactory>().AsSingle().NonLazy();
+
+            Container.Bind<Spawner>().FromComponentInHierarchy().AsSingle().NonLazy();
         }
     }
 }

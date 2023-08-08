@@ -1,4 +1,10 @@
-public enum ProjectileType
+namespace Cannon_Test
 {
-    JackCannonball,
+    public enum ProjectileType
+    {
+        JackCannonball,
+        JackFaceCannonball,
+    }
+
 }
+

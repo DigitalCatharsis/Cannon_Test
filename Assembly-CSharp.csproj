@@ -58,29 +58,28 @@
   <ItemGroup>
     <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\ICoreFactory.cs" />
     <Compile Include="Assets\Cannon_Test\CT_ObjectPooling\PoolObjectLoader.cs" />
-    <Compile Include="Assets\Cannon_Test\CP_Projectiles\JackCannonBall\ProjectyleConf.cs" />
-    <Compile Include="Assets\Cannon_Test\CT_Objects\Enemy\States\Abilities_StateScripts\MoveForward.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_Characters\Enemy\States\Abilities_StateScripts\MoveForward.cs" />
     <Compile Include="Assets\Cannon_Test\CT_MenuEvents\GameEvent.cs" />
     <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\PlayerSpawnMarker.cs" />
-    <Compile Include="Assets\Cannon_Test\CT_Objects\Enemy\States\Abilities_StateScripts\Idle.cs" />
-    <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\ProjectileSpawn\ProjectileSpawner.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_Characters\Enemy\States\Abilities_StateScripts\Idle.cs" />
     <Compile Include="Assets\Cannon_Test\CT_MenuEvents\GameEventListener.cs" />
     <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\ProjectileSpawn\ProjectileType.cs" />
-    <Compile Include="Assets\Cannon_Test\CT_ObjectPooling\PoolObject.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_ObjectPooling\EnemyPoolObject.cs" />
     <Compile Include="Assets\Cannon_Test\CT_DI\Installers\GameInstaller.cs" />
     <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\EnemySpawn\EnemyFactory.cs" />
     <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\PowerUpType.cs" />
-    <Compile Include="Assets\Cannon_Test\CP_Projectiles\ProjectileControl.cs" />
-    <Compile Include="Assets\Cannon_Test\CT_Objects\Enemy\States\BaseScripts\CharacterState.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_Characters\Enemy\States\BaseScripts\CharacterState.cs" />
     <Compile Include="Assets\Cannon_Test\CT_MenuEvents\ButtonScale.cs" />
     <Compile Include="Assets\Cannon_Test\CT_MenuEvents\ChangeScene.cs" />
-    <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\EnemySpawn\EnemySpawner.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\Spawner.cs" />
     <Compile Include="Assets\Cannon_Test\CT_ObjectPooling\PoolManager.cs" />
-    <Compile Include="Assets\Cannon_Test\CT_Objects\Enemy\States\BaseScripts\StateData.cs" />
-    <Compile Include="Assets\Cannon_Test\CT_Objects\Player\PlayerControl.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_Characters\Enemy\States\BaseScripts\StateData.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_Characters\Player\PlayerControl.cs" />
     <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\EnemySpawn\EnemyType.cs" />
-    <Compile Include="Assets\Cannon_Test\CT_Objects\CharacterControl.cs" />
-    <Compile Include="Assets\Cannon_Test\!temp\Destroyable.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_Characters\CharacterControl.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_ObjectPooling\PowerUpPoolObject.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\ProjectileSpawn\ProjectileFactory.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_PowerUps\PowerUp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -695,9 +694,6 @@
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
@@ -733,6 +729,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>

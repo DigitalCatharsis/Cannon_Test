@@ -22,23 +22,6 @@ namespace Cannon_Test
             _zombieElitePrefab = Resources.Load(_zombieEliteName) as GameObject;
         }
 
-        //public void CreatePrefab(EnemyType enemyType, Vector3 position)
-        //{
-        //    switch (enemyType)
-        //    {
-        //        case EnemyType.ZOMBIE_ELITE:
-        //            {
-        //                _diContainer.InstantiatePrefab(_zombieElitePrefab, position, Quaternion.identity, null);
-        //                break;
-        //            }
-        //        case EnemyType.ZOMBIE_GENERAL:
-        //            {
-        //                _diContainer.InstantiatePrefab(_zombieGeneralPrefab, position, Quaternion.identity, null);
-        //                break;
-        //            }
-        //    }
-        //}
-
         public GameObject AddToPool(EnemyType enemyType, Vector3 position, Quaternion rotation)
         {
             switch (enemyType)
@@ -56,6 +39,24 @@ namespace Cannon_Test
                     {
                         return null;
                     }
+
+
+                    //public void CreatePrefab(EnemyType enemyType, Vector3 position)
+                    //{
+                    //    switch (enemyType)
+                    //    {
+                    //        case EnemyType.ZOMBIE_ELITE:
+                    //            {
+                    //                _diContainer.InstantiatePrefab(_zombieElitePrefab, position, Quaternion.identity, null);
+                    //                break;
+                    //            }
+                    //        case EnemyType.ZOMBIE_GENERAL:
+                    //            {
+                    //                _diContainer.InstantiatePrefab(_zombieGeneralPrefab, position, Quaternion.identity, null);
+                    //                break;
+                    //            }
+                    //    }
+                    //}
             }
         }
     }
