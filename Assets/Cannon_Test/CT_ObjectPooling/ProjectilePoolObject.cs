@@ -3,15 +3,15 @@ using Zenject;
 
 namespace Cannon_Test
 {
-    public class EnemyPoolObject: MonoBehaviour, IPoolObject
+    public class ProjectilePoolObject : MonoBehaviour, IPoolObject
     {
         [Inject] private PoolManager _poolManager;
         [Inject] private LevelSpawner _spawner;
 
-        public EnemyType poolObjectType;
+        public ProjectileType poolObjectType;
         public void GotKilled()
         {
-            if (!_poolManager.enemyPoolDictionary[poolObjectType].Contains(this.gameObject))
+            if (!_poolManager.projectilePoolDictionary[poolObjectType].Contains(this.gameObject))
             {
                 TurnOff();
             }
@@ -22,5 +22,6 @@ namespace Cannon_Test
 
             _poolManager.AddObject(this);
         }
+
     }
 }

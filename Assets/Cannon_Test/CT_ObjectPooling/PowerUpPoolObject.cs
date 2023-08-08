@@ -3,10 +3,10 @@ using Zenject;
 
 namespace Cannon_Test
 {
-    public class PowerUpPoolObject: MonoBehaviour
+    public class PowerUpPoolObject: MonoBehaviour, IPoolObject
     {
         [Inject] private PoolManager _poolManager;
-        [Inject] private Spawner _spawner;
+        [Inject] private LevelSpawner _spawner;
 
         public PowerUpType poolObjectType;
         public void GotKilled()

@@ -35,9 +35,10 @@ namespace Cannon_Test
             Container.Bind<PoolObjectLoader>().AsSingle().NonLazy();
 
             Container.Bind<ICoreFactory<EnemyType>>().To<EnemyFactory>().AsSingle().NonLazy();
-            Container.Bind<ICoreFactory<PowerUpType>>().To<ProjectileFactory>().AsSingle().NonLazy();
+            Container.Bind<ICoreFactory<PowerUpType>>().To<PowerUpFactory>().AsSingle().NonLazy();
+            Container.Bind<ICoreFactory<ProjectileType>>().To<ProjectileFactory>().AsSingle().NonLazy();
 
-            Container.Bind<Spawner>().FromComponentInHierarchy().AsSingle().NonLazy();
+            Container.Bind<LevelSpawner>().FromComponentInHierarchy().AsSingle().NonLazy();
         }
     }
 }

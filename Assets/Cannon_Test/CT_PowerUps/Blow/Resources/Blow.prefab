@@ -93,7 +93,6 @@ GameObject:
   - component: {fileID: 2794275307507736313}
   - component: {fileID: 963422929079850081}
   - component: {fileID: 7403724212254025162}
-  - component: {fileID: 8637713915775382657}
   - component: {fileID: 3286694417795518630}
   m_Layer: 0
   m_Name: Blow
@@ -140,18 +139,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4322bedf98c3bea4db7665e51f37ca54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8637713915775382657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7913192637553408691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da6e4f09630ed0f4e99e8bf03a822132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3286694417795518630

@@ -1,10 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using UnityEditor;
-using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Zenject;
 
 namespace Cannon_Test
@@ -13,20 +9,31 @@ namespace Cannon_Test
     {
         public Dictionary<EnemyType, List<GameObject>> enemyPoolDictionary = new Dictionary<EnemyType, List<GameObject>>();
         public Dictionary<PowerUpType, List<GameObject>> powerUpPoolDictionary = new Dictionary<PowerUpType, List<GameObject>>();
+        public Dictionary<ProjectileType, List<GameObject>> projectilePoolDictionary = new Dictionary<ProjectileType, List<GameObject>>();
 
         [Inject] private PoolObjectLoader _poolObjectLoader;
 
         #region SetupDictionary
+
         private void SetUpDictionary<T>(T objType)
         {
-            object dictionary = objType switch
+            switch (objType)
             {
-                EnemyType enemyType => DictionarySetuper(enemyType, enemyPoolDictionary),
-                PowerUpType powerUpType => DictionarySetuper(powerUpType, powerUpPoolDictionary),
-                var unknownType => throw new Exception($"{unknownType?.GetType()}")
-            };
+                case EnemyType enemyType:
+                    DictionarySetuper(enemyType, enemyPoolDictionary);
+                    break;
+                case PowerUpType powerUpType:
+                    DictionarySetuper(powerUpType, powerUpPoolDictionary);
+                    break;
+                case ProjectileType projectileType:
+                    DictionarySetuper(projectileType, projectilePoolDictionary);
+                    break;
+                default:
+                    throw new Exception($"{objType?.GetType()}");
+            }
         }
-        private Dictionary<T, List<GameObject>> DictionarySetuper<T>(T objType, Dictionary<T, List<GameObject>> dictionary)
+
+        private void DictionarySetuper<T>(T objType, Dictionary<T, List<GameObject>> dictionary)
         {
             T[] arr = Enum.GetValues(typeof(T)) as T[];
 
@@ -37,7 +44,6 @@ namespace Cannon_Test
                     dictionary.Add(p, new List<GameObject>());
                 }
             }
-            return dictionary;
         }
         #endregion
 
@@ -48,6 +54,7 @@ namespace Cannon_Test
             {
                 EnemyType enemyType => ObjectGetter(enemyPoolDictionary, enemyType, position, rotation),
                 PowerUpType powerUpType => ObjectGetter(powerUpPoolDictionary, powerUpType, position, rotation),
+                ProjectileType projectileType => ObjectGetter(projectilePoolDictionary, projectileType, position, rotation),
                 var unknownType => throw new Exception($"{unknownType?.GetType()}")
             };
             return typeList;
@@ -91,6 +98,11 @@ namespace Cannon_Test
                     list = powerUpPoolDictionary[(PowerUpType)powerUpType.poolObjectType];
                     list.Add(powerUpType.gameObject);
                     powerUpType.gameObject.SetActive(false);
+                    break;
+                case ProjectilePoolObject projectileType:
+                    list = projectilePoolDictionary[(ProjectileType)projectileType.poolObjectType];
+                    list.Add(projectileType.gameObject);
+                    projectileType.gameObject.SetActive(false);
                     break;
                 default:
                     throw new Exception($"{objType?.GetType()}");

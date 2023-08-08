@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Cannon_Test
 {
-    public class Spawner : MonoBehaviour 
+    public class LevelSpawner : MonoBehaviour 
     {
         [Inject] private PoolManager _poolManager;
         [Inject] private PlayerControl _playerControl;
@@ -19,7 +19,7 @@ namespace Cannon_Test
 
         //courutine
         //uniTask?
-        //Красивый таймер в апдейтах, кек
+        //Красивый таймер в апдейтах, кек w
 
         private void Update()
         {

@@ -1619,7 +1619,6 @@ GameObject:
   - component: {fileID: 5471562890509836820}
   - component: {fileID: 5471562890509836823}
   - component: {fileID: 212370414}
-  - component: {fileID: 2108881977}
   m_Layer: 6
   m_Name: ZombieElite
   m_TagString: Untagged
@@ -1699,18 +1698,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObjectType: 1
---- !u!114 &2108881977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5471562890509836811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da6e4f09630ed0f4e99e8bf03a822132, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5483014920846447629
 GameObject:
   m_ObjectHideFlags: 0

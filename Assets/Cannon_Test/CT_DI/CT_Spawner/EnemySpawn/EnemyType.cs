@@ -5,6 +5,5 @@ namespace Cannon_Test
         ZOMBIE_GENERAL,
         ZOMBIE_ELITE,
     }
-
 }
 

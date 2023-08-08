@@ -12,6 +12,7 @@ namespace Cannon_Test
 
         [Inject] private ICoreFactory<EnemyType> _enemyFactory;
         [Inject] private ICoreFactory<PowerUpType> _powerUpFactory;
+        [Inject] private ICoreFactory<ProjectileType> _projectileFactory;
 
         public GameObject InstantiatePrefab<T>(T objType, Vector3 position, Quaternion rotation)
         {
@@ -19,6 +20,7 @@ namespace Cannon_Test
             {
                 EnemyType enemyType => InstantiateEnemyPrefab(enemyType, position, rotation),
                 PowerUpType powerUpType => InstantiatePowerUpPrefab(powerUpType, position, rotation),
+                ProjectileType projectileType => InstantiateProjectilePrefab(projectileType, position, rotation),
                 var unknownType => throw new Exception($"{unknownType?.GetType()}")
             };
             return typelist;
@@ -32,6 +34,10 @@ namespace Cannon_Test
         public GameObject InstantiatePowerUpPrefab(PowerUpType poolObjectType, Vector3 position, Quaternion rotation)
         {
             return _powerUpFactory.AddToPool(poolObjectType, position, rotation);
+        }        
+        public GameObject InstantiateProjectilePrefab(ProjectileType poolObjectType, Vector3 position, Quaternion rotation)
+        {
+            return _projectileFactory.AddToPool(poolObjectType, position, rotation);
         }
     }
 }

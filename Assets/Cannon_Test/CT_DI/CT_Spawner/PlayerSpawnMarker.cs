@@ -7,7 +7,7 @@ namespace Cannon_Test
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.magenta;
-            Gizmos.DrawSphere(transform.position, 1);
+            Gizmos.DrawSphere(transform.position, 0.25f);
         }
     }
 }

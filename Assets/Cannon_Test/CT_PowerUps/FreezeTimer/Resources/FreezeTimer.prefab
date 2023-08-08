@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4799122082318420715}
   - component: {fileID: 7566168877310345331}
   - component: {fileID: 4128691055554832427}
-  - component: {fileID: 8426145259675705160}
   - component: {fileID: 1359753472768894343}
   m_Layer: 0
   m_Name: FreezeTimer
@@ -58,18 +57,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4322bedf98c3bea4db7665e51f37ca54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8426145259675705160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689020275201486497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da6e4f09630ed0f4e99e8bf03a822132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1359753472768894343

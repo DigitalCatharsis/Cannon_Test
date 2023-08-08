@@ -3,34 +3,38 @@ using Zenject;
 
 namespace Cannon_Test
 {
-    public class ProjectileFactory : ICoreFactory<PowerUpType> //IEnemyFactory
+    public class ProjectileFactory : ICoreFactory<ProjectileType> //IEnemyFactory
     {
+
         [Inject] private DiContainer _diContainer;
 
-        private Object _blowPrefab;
-        private Object _freezeTimerPrefab;
+        private readonly Object _JackCannonBallPrefab;
+        private readonly Object _JackFaceCannonBallPrefab;
 
-        private const string _blowName = "Blow";
-        private const string _freezeTimerName = "FreezeTimer";
+        private readonly string _JackCannonBall;
+        private readonly string _JackFaceCannonBall;
 
         public ProjectileFactory()
         {
-            _blowPrefab = Resources.Load(_blowName) as GameObject;
-            _freezeTimerPrefab = Resources.Load(_freezeTimerName) as GameObject;
+            _JackCannonBall = ProjectileType.JackCannonball.ToString();
+            _JackFaceCannonBall = ProjectileType.JackFaceCannonball.ToString();
+
+            _JackCannonBallPrefab = Resources.Load(_JackCannonBall) as GameObject;
+            _JackFaceCannonBallPrefab = Resources.Load(_JackFaceCannonBall) as GameObject;
         }
 
-        public GameObject AddToPool(PowerUpType enemyType, Vector3 position, Quaternion rotation)
+        public GameObject AddToPool(ProjectileType enemyType, Vector3 position, Quaternion rotation)
         {
             switch (enemyType)
             {
-                case PowerUpType.Blow:
+                case ProjectileType.JackCannonball:
                     {
-                        return _diContainer.InstantiatePrefab(_blowPrefab, position, rotation, null);
+                        return _diContainer.InstantiatePrefab(_JackCannonBallPrefab, position, rotation, null);
                     }
-                case PowerUpType.FreezeTimer:
+                case ProjectileType.JackFaceCannonball:
                     {
 
-                        return _diContainer.InstantiatePrefab(_freezeTimerPrefab, position, rotation, null);
+                        return _diContainer.InstantiatePrefab(_JackFaceCannonBallPrefab, position, rotation, null);
                     }
                 default:  //Интересно, как заткнуть эту дыру грамотно....
                     {
