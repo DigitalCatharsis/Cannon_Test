@@ -7,16 +7,16 @@ namespace Cannon_Test
 
     public class CharacterState : StateMachineBehaviour
     {
-        public CharacterControl characterControl;
+        public EnemyControl enemyControl;
 
         public List<StateData> ListAbilityData = new List<StateData>();
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (characterControl == null) 
+            if (enemyControl == null) 
             {
-                characterControl = animator.transform.root.gameObject.GetComponent<CharacterControl>();
-                characterControl.CacheCharacterControl(animator);
+                enemyControl = animator.transform.root.gameObject.GetComponent<EnemyControl>();
+                enemyControl.CacheCharacterControl(animator);
             }
 
             foreach (StateData d in ListAbilityData)

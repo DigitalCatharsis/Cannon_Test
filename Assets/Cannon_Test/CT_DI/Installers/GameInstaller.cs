@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -14,11 +13,16 @@ namespace Cannon_Test
         [Header("Object Pooling")]
         [SerializeField] private PoolManager _poolManager;
 
+        [Header("Animation")]
+        [SerializeField] private DeathAnimationManager _deathAnimationManager;
+        [SerializeField] private DeathAnimationLoader _deathAnimationLoader;
+
         public override void InstallBindings()
         {
             BindInstallerInterfaces();
             BindPlayer();
             BindSpawn();
+            BindDeathAnimation();
         }
         private void BindInstallerInterfaces()
         {
@@ -39,6 +43,12 @@ namespace Cannon_Test
             Container.Bind<ICoreFactory<ProjectileType>>().To<ProjectileFactory>().AsSingle().NonLazy();
 
             Container.Bind<LevelSpawner>().FromComponentInHierarchy().AsSingle().NonLazy();
+        }
+
+        private void BindDeathAnimation()
+        {
+            Container.Bind<DeathAnimationManager>().FromComponentInNewPrefab(_deathAnimationManager).AsSingle().NonLazy();
+            Container.Bind<DeathAnimationLoader>().FromComponentInNewPrefab(_deathAnimationLoader).AsSingle().NonLazy();
         }
     }
 }

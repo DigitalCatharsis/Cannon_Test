@@ -7,7 +7,6 @@ namespace Cannon_Test
     public class LevelSpawner : MonoBehaviour 
     {
         [Inject] private PoolManager _poolManager;
-        [Inject] private PlayerControl _playerControl;
 
         private float _enemyElapsedTime;
         private float _powerUpElapsedTime;
@@ -64,7 +63,6 @@ namespace Cannon_Test
             var randomValue = values.GetValue(randomIndex);
             var result = (T)Convert.ChangeType(randomValue, typeof(T));
             return result;
-
         }
         public Vector3 GetRandomPosition()
         {

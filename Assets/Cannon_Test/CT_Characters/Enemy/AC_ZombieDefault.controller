@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cea65faf8dd3b46b235451936b40ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterControl: {fileID: 0}
+  enemyControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 61e600803931e2848a4b7a614031b577, type: 2}
 --- !u!1109 &-6787318753251932582
@@ -118,7 +118,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AC_Zombie
+  m_Name: AC_ZombieDefault
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Idle
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cea65faf8dd3b46b235451936b40ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterControl: {fileID: 0}
+  enemyControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 61e600803931e2848a4b7a614031b577, type: 2}
 --- !u!1101 &1303198146580421592
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cea65faf8dd3b46b235451936b40ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterControl: {fileID: 0}
+  enemyControl: {fileID: 0}
   ListAbilityData:
   - {fileID: 11400000, guid: 1f6dc72d33cc7064499a19af91a44890, type: 2}
 --- !u!1101 &7390498381700907409

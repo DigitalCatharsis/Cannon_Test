@@ -20,10 +20,10 @@ namespace Cannon_Test
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            ConstantMove(characterState.characterControl, animator, stateInfo);
+            ConstantMove(characterState.enemyControl, animator, stateInfo);
         }
 
-        private void ConstantMove(CharacterControl control, Animator animator, AnimatorStateInfo stateInfo)
+        private void ConstantMove(EnemyControl control, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (control.isMoving)
             {                

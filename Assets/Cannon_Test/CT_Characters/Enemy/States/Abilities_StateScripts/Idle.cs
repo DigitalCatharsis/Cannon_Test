@@ -17,9 +17,9 @@ namespace Cannon_Test
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (characterState.characterControl.isMoving)
+            if (characterState.enemyControl.isMoving)
             {
-                animator.SetBool(characterState.characterControl.walkingType.ToString(), true);
+                animator.SetBool(characterState.enemyControl.walkingType.ToString(), true);
             }
         }
     }

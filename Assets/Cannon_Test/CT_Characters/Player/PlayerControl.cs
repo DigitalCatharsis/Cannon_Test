@@ -34,8 +34,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //почему-то первый летит быстрее остальных???? WTF?
-            var cannonBall = _poolManager.GetObject(cannonBallType, _cannonBallSpawnPoint.transform.position, _cannonBallSpawnPoint.transform.rotation);
-            //cannonBall.transform.parent = null;
+            var cannonBall = _poolManager.GetObject(cannonBallType, _cannonBallSpawnPoint.transform.position, Quaternion.Euler(32,90,-15));
             cannonBall.GetComponent<Rigidbody>().velocity = _cannonBallSpawnPoint.transform.forward * cannonBallSpeed * Time.deltaTime;
             //Debug.Log($"{_cannonBallSpawnPoint.transform.forward} {cannonBallSpeed}");
         }

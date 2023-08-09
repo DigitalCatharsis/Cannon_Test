@@ -6,9 +6,16 @@ namespace Cannon_Test
     public class ProjectilePoolObject : MonoBehaviour, IPoolObject
     {
         [Inject] private PoolManager _poolManager;
-        [Inject] private LevelSpawner _spawner;
+
+        private ProjectileControl _projectileControl;
 
         public ProjectileType poolObjectType;
+
+        private void Awake()
+        {
+            _projectileControl = this.gameObject.GetComponent<ProjectileControl>();
+        }
+
         public void GotKilled()
         {
             if (!_poolManager.projectilePoolDictionary[poolObjectType].Contains(this.gameObject))
@@ -18,8 +25,7 @@ namespace Cannon_Test
         }
         public void TurnOff()
         {
-            this.transform.position = _spawner.GetRandomPosition();
-
+            _projectileControl.OnTurnOff();
             _poolManager.AddObject(this);
         }
 
