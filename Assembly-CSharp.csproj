@@ -83,6 +83,7 @@
     <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\EnemySpawn\EnemyType.cs" />
     <Compile Include="Assets\Cannon_Test\CT_Characters\CharacterControl.cs" />
     <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\ProjectileSpawn\ProjectileFactory.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_Projectiles\ProjectileControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -18,6 +18,7 @@ namespace Cannon_Test
         }
         public void TurnOff()
         {
+            this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             this.transform.position = _spawner.GetRandomPosition();
 
             _poolManager.AddObject(this);

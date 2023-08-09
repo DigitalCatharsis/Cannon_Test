@@ -47,10 +47,6 @@ namespace Cannon_Test
                 c.characterControl = this;
             }
         }
-        private void OnMouseDown()
-        {
-            (GetComponent<EnemyPoolObject>()).GotKilled();
-        }
     }
 }
 

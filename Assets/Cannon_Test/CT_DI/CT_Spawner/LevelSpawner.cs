@@ -9,12 +9,15 @@ namespace Cannon_Test
         [Inject] private PoolManager _poolManager;
         [Inject] private PlayerControl _playerControl;
 
-        private float _elapsedTime;
-        private float _timer;  //Seconds to spawn
+        private float _enemyElapsedTime;
+        private float _powerUpElapsedTime;
+        private float _enemySpawnTimer;  //Seconds to spawn
+        private float _powerUpSpawnTimer;  //Seconds to spawn
 
         private void Awake()
         {
-            _timer = 3;
+            _enemySpawnTimer = 3.0f;
+            _powerUpSpawnTimer = 10.0f;
         }
 
         //courutine
@@ -23,16 +26,33 @@ namespace Cannon_Test
 
         private void Update()
         {
-            _elapsedTime += Time.deltaTime;
+            SpawnEnemy();
+            SpawnPowerUp();
+        }
 
-            if (_elapsedTime > _timer)
+        private void SpawnEnemy()
+        {
+            _enemyElapsedTime += Time.deltaTime;
+
+            if (_enemyElapsedTime > _enemySpawnTimer)
             {
-                _elapsedTime = 0;
+                _enemyElapsedTime = 0;
 
                 var enemyObj = _poolManager.GetObject(GetRandomValueFromEnum<EnemyType>(), GetRandomPosition(), Quaternion.Euler(0, 180, 0));
-                var projectileObj = _poolManager.GetObject(GetRandomValueFromEnum<PowerUpType>(), GetRandomPosition(), Quaternion.Euler(0,90,0));
                 //Debug.Log("spawning: " + obj.name);
                 enemyObj.SetActive(true);
+            }
+        }
+        private void SpawnPowerUp()
+        {
+            _powerUpElapsedTime += Time.deltaTime;
+
+            if (_powerUpElapsedTime > _powerUpSpawnTimer)
+            {
+                _powerUpElapsedTime = 0;
+
+                var projectileObj = _poolManager.GetObject(GetRandomValueFromEnum<PowerUpType>(), GetRandomPosition(), Quaternion.Euler(0, 90, 0));
+                //Debug.Log("spawning: " + obj.name);
                 projectileObj.SetActive(true);
             }
         }
@@ -51,7 +71,6 @@ namespace Cannon_Test
             var position = new Vector3(this.GetRandomFloat(-10.0f, 10.0f), 0.50f, GetRandomFloat(-0.9f, 3.8f));
             return position;
         }
-
         public float GetRandomFloat(float start, float end)
         {
             return UnityEngine.Random.Range(start, end);

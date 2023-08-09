@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7084046969138139468}
   - component: {fileID: 2673827785557379917}
   - component: {fileID: 7211559495647842852}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 963422929079850081}
   - component: {fileID: 7403724212254025162}
   - component: {fileID: 3286694417795518630}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Blow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7913192637553408691}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.95969564, z: 1}
