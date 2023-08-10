@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Cannon_Test
@@ -26,7 +23,7 @@ namespace Cannon_Test
         private void ConstantMove(EnemyControl control, Animator animator, AnimatorStateInfo stateInfo)
         {
             if (control.isMoving)
-            {                
+            {
                 control.MoveForward(_speed);
             }
             else

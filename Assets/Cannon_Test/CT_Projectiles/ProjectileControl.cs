@@ -11,7 +11,7 @@ namespace Cannon_Test
 
         private void OnCollisionEnter(Collision collider)
         {
-            Debug.Log(collider.gameObject.name);
+            //Debug.Log(collider.gameObject.name);
 
             if (collider.transform.root.GetComponent<EnemyPoolObject>())
             {
@@ -19,16 +19,21 @@ namespace Cannon_Test
                 Destroy(this.gameObject);
             }
 
-            Destroy(this.gameObject);
-        }
-
-        private void OnTriggerEnter(Collider collider)
-        {
             if (collider.transform.root.GetComponent<PowerUpPoolObject>())
             {
                 collider.transform.root.GetComponent<PowerUpPoolObject>().GotKilled();
             }
+
+            Destroy(this.gameObject);
         }
+
+        //private void OnTriggerEnter(Collider collider)
+        //{
+        //    if (collider.transform.root.GetComponent<PowerUpPoolObject>())
+        //    {
+        //        collider.transform.root.GetComponent<PowerUpPoolObject>().GotKilled();
+        //    }
+        //}
 
         private void Awake()
         {

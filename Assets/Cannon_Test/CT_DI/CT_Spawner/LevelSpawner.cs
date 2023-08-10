@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Cannon_Test
 {
-    public class LevelSpawner : MonoBehaviour 
+    public class LevelSpawner : MonoBehaviour
     {
         [Inject] private PoolManager _poolManager;
 
@@ -15,8 +15,8 @@ namespace Cannon_Test
 
         private void Awake()
         {
-            _enemySpawnTimer = 3.0f;
-            _powerUpSpawnTimer = 10.0f;
+            _enemySpawnTimer = GetRandomFloat(3.0f, 5.0f);
+            _powerUpSpawnTimer = GetRandomFloat(10.0f, 15.0f);
         }
 
         //courutine

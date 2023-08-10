@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -10,11 +11,11 @@ namespace Cannon_Test
         [SerializeField] private PlayerControl _playerControl;
         [SerializeField] private Transform _playerLocation;
 
-        [Header("Object Pooling")]
-        [SerializeField] private PoolManager _poolManager;
+        //[Header("Object Pooling")]
+        //[SerializeField] private PoolManager _poolManager;
 
         [Header("Animation")]
-        [SerializeField] private DeathAnimationManager _deathAnimationManager;
+        //[SerializeField] private DeathAnimationManager _deathAnimationManager;
         [SerializeField] private DeathAnimationLoader _deathAnimationLoader;
 
         public override void InstallBindings()
@@ -23,7 +24,9 @@ namespace Cannon_Test
             BindPlayer();
             BindSpawn();
             BindDeathAnimation();
+            BindLevelLogic();
         }
+
         private void BindInstallerInterfaces()
         {
             Container.BindInterfacesTo<GameInstaller>().FromInstance(this).AsSingle().NonLazy();
@@ -35,8 +38,9 @@ namespace Cannon_Test
         }
         private void BindSpawn()
         {
-            Container.Bind<PoolManager>().FromComponentInNewPrefab(_poolManager).AsSingle().NonLazy();
+            //Container.Bind<PoolManager>().FromComponentInNewPrefab(_poolManager).AsSingle().NonLazy();
             Container.Bind<PoolObjectLoader>().AsSingle().NonLazy();
+            Container.Bind<PoolManager>().AsSingle().NonLazy();
 
             Container.Bind<ICoreFactory<EnemyType>>().To<EnemyFactory>().AsSingle().NonLazy();
             Container.Bind<ICoreFactory<PowerUpType>>().To<PowerUpFactory>().AsSingle().NonLazy();
@@ -47,8 +51,13 @@ namespace Cannon_Test
 
         private void BindDeathAnimation()
         {
-            Container.Bind<DeathAnimationManager>().FromComponentInNewPrefab(_deathAnimationManager).AsSingle().NonLazy();
+            //Container.Bind<DeathAnimationManager>().FromComponentInNewPrefab(_deathAnimationManager).AsSingle().NonLazy();
+            Container.Bind<DeathAnimationManager>().AsSingle().NonLazy();
             Container.Bind<DeathAnimationLoader>().FromComponentInNewPrefab(_deathAnimationLoader).AsSingle().NonLazy();
+        }
+        private void BindLevelLogic()
+        {
+            Container.Bind<LevelLogic>().FromComponentInHierarchy().AsSingle().NonLazy();
         }
     }
 }

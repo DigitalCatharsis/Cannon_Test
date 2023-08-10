@@ -6,9 +6,15 @@ namespace Cannon_Test
     public class PowerUpPoolObject: MonoBehaviour, IPoolObject
     {
         [Inject] private PoolManager _poolManager;
-        [Inject] private LevelSpawner _spawner;
+        private PowerUp _powerUp;
 
         public PowerUpType poolObjectType;
+
+        private void Awake()
+        {
+            _powerUp = this.gameObject.GetComponent<PowerUp>();
+        }
+
         public void GotKilled()
         {
             if (!_poolManager.powerUpPoolDictionary[poolObjectType].Contains(this.gameObject))
@@ -18,10 +24,8 @@ namespace Cannon_Test
         }
         public void TurnOff()
         {
-            this.transform.position = _spawner.GetRandomPosition();
-
+            _powerUp.OnTurnOff();
             _poolManager.AddObject(this);
         }
-
     }
 }

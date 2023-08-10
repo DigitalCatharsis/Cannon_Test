@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Zenject;
 
 namespace Cannon_Test
 {
-    public class DeathAnimationManager : MonoBehaviour
+    public class DeathAnimationManager 
     {
         [Inject] private DeathAnimationLoader _deathAnimationLoader;
         private List<RuntimeAnimatorController> _Candidates = new List<RuntimeAnimatorController>();

@@ -24,8 +24,9 @@ namespace Cannon_Test
         private Animator _animator;
         private Collider _collider;
         [Inject] DeathAnimationManager _deathAnimationManager;
-        [SerializeField] private float _deathDelayTime = 3.0f;
+        public float deathDelayTime = 3.0f;
         public TransitionParameter walkingType;
+        [Inject] LevelLogic _levelLogic;
 
         [Header ("Spawn")]
         public EnemyType enemyType;
@@ -47,16 +48,25 @@ namespace Cannon_Test
             _currentHealth = maxHealth;
         }
 
-        public void OnGotHit()
+        public void OnGotHit(bool instaKill = false)
         {
-            _currentHealth -= 1;
+            if (instaKill)
+            {
+                _currentHealth = 0;
+            }
+            else
+            {
+                _currentHealth -= 1;
+            }
 
             if (_currentHealth <= 0)
             {
                 _collider.enabled = false;
-                StartCoroutine(Death(_deathDelayTime));
+                StartCoroutine(Death(deathDelayTime));
             }
         }
+
+        
 
         IEnumerator Death(float delayTime)
         {
@@ -91,6 +101,11 @@ namespace Cannon_Test
             {
                 c.enemyControl = this;
             }
+        }
+
+        private void OnEnable()
+        {
+            _animator.speed = _levelLogic.GlobalEnemyAnimatorSpeed;
         }
     }
 }

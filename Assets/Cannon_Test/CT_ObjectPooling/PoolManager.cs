@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Cannon_Test
 {
-    public class PoolManager : MonoBehaviour
+    public class PoolManager
     {
         public Dictionary<EnemyType, List<GameObject>> enemyPoolDictionary = new Dictionary<EnemyType, List<GameObject>>();
         public Dictionary<PowerUpType, List<GameObject>> powerUpPoolDictionary = new Dictionary<PowerUpType, List<GameObject>>();
