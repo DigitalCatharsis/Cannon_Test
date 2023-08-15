@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ModestTree;
 using ModestTree.Util;
@@ -9,6 +10,7 @@ using UniRx;
 
 namespace Zenject
 {
+    [DebuggerNonUserCode]
     public class TickableManager
     {
         [Inject(Optional = true, Source = InjectSources.Local)]

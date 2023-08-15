@@ -19,19 +19,26 @@ namespace Cannon_Test
         public int maxHealth = 1; //Defaul is 1, if does not set on prefab
 
         [Header("Animation")]
-        public bool isMoving;
         public bool ragdollTriggered;
         private Animator _animator;
         private Collider _collider;
         [Inject] DeathAnimationManager _deathAnimationManager;
-        public float deathDelayTime = 3.0f;
+        [SerializeField] private float _deathDelayTime = 3.0f;
+        //public float freezeDelayTime = 0.0f;
         public TransitionParameter walkingType;
         [Inject] LevelLogic _levelLogic;
 
-        [Header ("Spawn")]
+        [Header("Spawn")]
         public EnemyType enemyType;
         [Inject] private LevelSpawner _spawner;
         private EnemyPoolObject _enemyPoolobject;
+
+        [Header("Bools")]
+        public bool isKilled = false;
+        private bool _isFreezed = false;
+        public bool isMoving;
+
+        [Inject] private PowerUpManager _powerUpManager;
 
         private void Awake()
         {
@@ -40,43 +47,69 @@ namespace Cannon_Test
             _animator = GetComponentInChildren<Animator>();
             _collider = GetComponentInChildren<Collider>();
             _currentHealth = maxHealth;
+            _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
+
+            SubscribeToPowerManager(_powerUpManager);
+
         }
-        public void OnTurnOff()
+        public void SubscribeToPowerManager(PowerUpManager powerUpManager)
         {
-            GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
-            this.transform.position = _spawner.GetRandomPosition();
-            _currentHealth = maxHealth;
+            _powerUpManager.NotifyFreeze += OnFreezeStatusChanges;
+        }
+
+        private void OnFreezeStatusChanges()
+        {
+            _isFreezed = _levelLogic.IsTimerFreezed;
+            _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
         }
 
         public void OnGotHit(bool instaKill = false)
         {
             if (instaKill)
             {
-                _currentHealth = 0;
+                OnGotKilled();
+            }
+
+            _currentHealth -= 1;
+
+            if (_currentHealth <= 0) 
+            {
+                OnGotKilled();
+            }
+        }
+        
+        private void OnGotKilled()
+        {
+            isKilled = true;
+            _collider.enabled = false;
+            if (!_isFreezed)
+            {
+                StartCoroutine(Death());
             }
             else
             {
-                _currentHealth -= 1;
-            }
-
-            if (_currentHealth <= 0)
-            {
-                _collider.enabled = false;
-                StartCoroutine(Death(deathDelayTime));
+                StartCoroutine(WaitForUnfreeze());
             }
         }
 
-        
-
-        IEnumerator Death(float delayTime)
+        IEnumerator Death()
         {
             _animator.runtimeAnimatorController = _deathAnimationManager.GetAnimator();
-            yield return new WaitForSeconds(delayTime);
-            _collider.enabled = true;
-            _enemyPoolobject.GotKilled();
-            _animator.runtimeAnimatorController = _deathAnimationManager.GetDefaultAnimator();
+            yield return new WaitForSeconds(_deathDelayTime);
+            yield return new WaitForEndOfFrame();
+            this.gameObject.SetActive(false);
+
+            Debug.Log(this.name);
         }
 
+        IEnumerator WaitForUnfreeze()
+        {
+            while (_isFreezed)
+            {
+                yield return null;
+            }            
+            StartCoroutine(Death());
+        }
 
         public void MoveForward(float speed)
         {
@@ -90,10 +123,10 @@ namespace Cannon_Test
             var randomValue = values.GetValue(randomIndex);
             var result = (T)Convert.ChangeType(randomValue, typeof(T));
             return result;
-
         }
 
-        public void CacheCharacterControl(Animator animator)  
+        //Refference to animation states
+        public void CacheCharacterControl(Animator animator)
         {
             CharacterState[] arr = animator.GetBehaviours<CharacterState>();
 
@@ -103,9 +136,20 @@ namespace Cannon_Test
             }
         }
 
-        private void OnEnable()
+        public void OnEnable()
         {
-            _animator.speed = _levelLogic.GlobalEnemyAnimatorSpeed;
+            _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
+        }
+
+        public void OnDisable()
+        {
+            isKilled = false;
+            GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
+            this.transform.position = _spawner.GetRandomPosition();
+            _currentHealth = maxHealth;
+            _collider.enabled = true;
+            _enemyPoolobject.GotKilled();
+            _animator.runtimeAnimatorController = _deathAnimationManager.GetDefaultAnimator();
         }
     }
 }

@@ -3,11 +3,13 @@
 #pragma warning disable 649
 
 using ModestTree;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Analytics;
 
 namespace Zenject
 {
+    [DebuggerNonUserCode]
     public abstract class MonoKernel : MonoBehaviour
     {
         [InjectLocal]

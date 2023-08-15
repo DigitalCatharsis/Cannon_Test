@@ -1,10 +1,9 @@
-using Cannon_Test;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
-
-public interface IPooledHittingObject
+namespace Cannon_Test
 {
-    public void OnTurnOff();
+    public interface IPooledHittingObject
+    {
+        public void OnEnable();
+        public void OnDisable();
+    }
 }
+

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4839976445273619170
+--- !u!1 &3710766605184407680
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4839976445273619168}
-  - component: {fileID: 4839976445273619171}
+  - component: {fileID: 1006044323248117763}
+  - component: {fileID: 1937246167231546084}
   m_Layer: 0
-  m_Name: LevelLogic
+  m_Name: PowerUpManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4839976445273619168
+--- !u!4 &1006044323248117763
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4839976445273619170}
+  m_GameObject: {fileID: 3710766605184407680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,20 +31,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4839976445273619171
+--- !u!114 &1937246167231546084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4839976445273619170}
+  m_GameObject: {fileID: 3710766605184407680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bcff00d0c6fe0a478d9341033b11f96, type: 3}
+  m_Script: {fileID: 11500000, guid: 057a3f43008348b419d691e43eed4788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultGlobalEnemyAnimatorSpeed: 1
-  _currentGlobalEnemyAnimatorSpeed: 1
-  _currentGlobalFreezeTime: 0
-  _maxFreezeTime: 3
-  _isTimerFreezed: 0
