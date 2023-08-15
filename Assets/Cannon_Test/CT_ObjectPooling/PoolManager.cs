@@ -59,6 +59,7 @@ namespace Cannon_Test
             };
             return typeList;
         }
+
         private GameObject ObjectGetter<T>(Dictionary<T, List<GameObject>> pool, T objType, Vector3 position, Quaternion rotation)
         {
             if (pool.Count == 0)

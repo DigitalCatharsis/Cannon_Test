@@ -57,7 +57,7 @@ namespace Cannon_Test
         public IEnumerator FreezeAnimation(Animator anim)
         {
             _levelLogic.FreezeGlobalAnimatorSpeed();  //We set it to zero to make sure that turned on and new object had the same speed
-            anim.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
+            //anim.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
             Invoke_FreezeStatusChanged();
             yield return new WaitForSeconds(_levelLogic.CurrentGlobalFreezeTimer);
             _levelLogic.ResetGlobalAnimatorSpeed();

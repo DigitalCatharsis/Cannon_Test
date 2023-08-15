@@ -8,7 +8,7 @@ namespace Cannon_Test
         [Inject] private PoolManager _poolManager;
         public ProjectileType poolObjectType;
 
-        public void GotKilled()
+        public void ReturnToPool()
         {
             if (!_poolManager.projectilePoolDictionary[poolObjectType].Contains(this.gameObject))
             {

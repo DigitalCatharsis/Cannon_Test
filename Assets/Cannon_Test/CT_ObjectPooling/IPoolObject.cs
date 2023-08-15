@@ -1,4 +1,4 @@
 public interface IPoolObject
 {
-    public void GotKilled();
+    public void ReturnToPool();
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2298436581130386863}
   - component: {fileID: -599492942634935570}
   - component: {fileID: 5128502531296498465}
+  - component: {fileID: 134060997463238142}
   m_Layer: 7
   m_Name: JackCannonball
   m_TagString: Untagged
@@ -126,3 +127,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b1e299bff0bea49be5343cf5721cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &134060997463238142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936468612158761878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a487cd8859c7ca0479f6d45a7a6a7aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObjectType: 0

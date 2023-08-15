@@ -7,11 +7,12 @@ namespace Cannon_Test
     public class LevelSpawner : MonoBehaviour
     {
         [Inject] private PoolManager _poolManager;
+        [Inject] private LevelLogic _levelLogic;
 
         private float _enemyElapsedTime;
         private float _powerUpElapsedTime;
-        private float _enemySpawnTimer;  //Seconds to spawn
-        private float _powerUpSpawnTimer;  //Seconds to spawn
+        [SerializeField] private float _enemySpawnTimer;  //Seconds to spawn
+        [SerializeField] private float _powerUpSpawnTimer;  //Seconds to spawn
 
         private void Awake()
         {
@@ -25,7 +26,10 @@ namespace Cannon_Test
 
         private void Update()
         {
-            SpawnEnemy();
+            if (!_levelLogic.IsTimerFreezed)
+            {
+                SpawnEnemy();
+            }            
             SpawnPowerUp();
         }
 
@@ -51,7 +55,6 @@ namespace Cannon_Test
                 _powerUpElapsedTime = 0;
 
                 var projectileObj = _poolManager.GetObject(GetRandomValueFromEnum<PowerUpType>(), GetRandomPosition(), Quaternion.Euler(0, 90, 0));
-                //Debug.Log("spawning: " + obj.name);
                 projectileObj.SetActive(true);
             }
         }

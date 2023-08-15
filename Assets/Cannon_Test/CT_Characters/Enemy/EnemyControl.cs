@@ -24,7 +24,6 @@ namespace Cannon_Test
         private Collider _collider;
         [Inject] DeathAnimationManager _deathAnimationManager;
         [SerializeField] private float _deathDelayTime = 3.0f;
-        //public float freezeDelayTime = 0.0f;
         public TransitionParameter walkingType;
         [Inject] LevelLogic _levelLogic;
 
@@ -98,8 +97,6 @@ namespace Cannon_Test
             yield return new WaitForSeconds(_deathDelayTime);
             yield return new WaitForEndOfFrame();
             this.gameObject.SetActive(false);
-
-            Debug.Log(this.name);
         }
 
         IEnumerator WaitForUnfreeze()
@@ -148,7 +145,7 @@ namespace Cannon_Test
             this.transform.position = _spawner.GetRandomPosition();
             _currentHealth = maxHealth;
             _collider.enabled = true;
-            _enemyPoolobject.GotKilled();
+            _enemyPoolobject.ReturnToPool();
             _animator.runtimeAnimatorController = _deathAnimationManager.GetDefaultAnimator();
         }
     }

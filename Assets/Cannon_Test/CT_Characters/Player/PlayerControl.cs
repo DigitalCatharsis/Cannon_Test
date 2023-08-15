@@ -11,7 +11,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 _worldPosition;
 
     [Header("Shooting")]
-    [SerializeField] private Transform _cannonBallSpawnPoint;
+    public Transform _cannonBallSpawnPoint;
     public ProjectileType cannonBallType;
     public float cannonBallSpeed;
     public float cannonBallAttackDamage;
@@ -31,8 +31,10 @@ public class PlayerControl : MonoBehaviour
     }
     private void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+       // if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.S))
         {
+            Debug.Log("Have Shooted");
             //почему-то первый летит быстрее остальных???? WTF?
             var cannonBall = _poolManager.GetObject(cannonBallType, _cannonBallSpawnPoint.transform.position, Quaternion.Euler(32,90,-15));
             cannonBall.GetComponent<Rigidbody>().velocity = _cannonBallSpawnPoint.transform.forward * cannonBallSpeed * Time.deltaTime;
