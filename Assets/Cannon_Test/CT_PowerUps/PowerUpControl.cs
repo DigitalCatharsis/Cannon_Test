@@ -7,10 +7,10 @@ namespace Cannon_Test
     {
         public PowerUpType _powerUpType;
 
-        public delegate void PowerUpHandler(PowerUpControl sender, PowerUpEventArgs powerUpEventArgs);
-        public event PowerUpHandler? NotifyPowerUpManager;
+        public delegate void PowerUpHandler(PowerUpControl sender, PowerUpType _powerUpType);
+        public event PowerUpHandler? OnInvokePowerUp;
 
-        [Inject] private LevelSpawner _spawner;
+        [Inject] private LevelSpawner _levelSpawner;
         [Inject] private PowerUpManager _powerUpManager;
 
         private void Awake()
@@ -25,7 +25,7 @@ namespace Cannon_Test
 
         public void InvokePowerUp()
         {
-            NotifyPowerUpManager(this, new PowerUpEventArgs(_powerUpType));
+            OnInvokePowerUp(this, _powerUpType);
         }
 
         public void OnEnable()
@@ -36,16 +36,7 @@ namespace Cannon_Test
         public void OnDisable()
         {
             _powerUpManager.UnsubscribeFromPowerUp(this);
-            this.transform.position = _spawner.GetRandomPosition();
-        }
-    }
-
-    public class PowerUpEventArgs
-    {
-        public PowerUpType _powerUpType;
-        public PowerUpEventArgs(PowerUpType powerUpType)
-        {
-            _powerUpType = powerUpType;
+            this.transform.position = _levelSpawner.GetRandomPosition(_levelSpawner.minCoordinates,_levelSpawner.maxCoordinates);
         }
     }
 }

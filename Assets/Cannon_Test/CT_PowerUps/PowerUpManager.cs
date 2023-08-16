@@ -17,18 +17,18 @@ namespace Cannon_Test
 
         public void SubscribeToPowerUp(PowerUpControl powerUp)
         {
-            powerUp.NotifyPowerUpManager += ExecutePowerUp;
+            powerUp.OnInvokePowerUp += ExecutePowerUp;
         }
         public void UnsubscribeFromPowerUp(PowerUpControl powerUp)
         {
-            powerUp.NotifyPowerUpManager -= ExecutePowerUp;
+            powerUp.OnInvokePowerUp -= ExecutePowerUp;
         }
 
-        public void ExecutePowerUp(PowerUpControl powerUp, PowerUpEventArgs eventArgs)
+        public void ExecutePowerUp(PowerUpControl powerUp, PowerUpType _powerUpType)
         {
             EnemyControl[] enemiesControlls = FindObjectsOfType<EnemyControl>();
 
-            switch (eventArgs._powerUpType)
+            switch (_powerUpType)
             {
                 case PowerUpType.FreezeTimer:
                     {
@@ -57,7 +57,6 @@ namespace Cannon_Test
         public IEnumerator FreezeAnimation(Animator anim)
         {
             _levelLogic.FreezeGlobalAnimatorSpeed();  //We set it to zero to make sure that turned on and new object had the same speed
-            //anim.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
             Invoke_FreezeStatusChanged();
             yield return new WaitForSeconds(_levelLogic.CurrentGlobalFreezeTimer);
             _levelLogic.ResetGlobalAnimatorSpeed();

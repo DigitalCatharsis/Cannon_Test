@@ -19,6 +19,9 @@ namespace Cannon_Test
         [Header("Managers")]
         [SerializeField] private PowerUpManager _powerUpManager;
 
+        [Header("Sound)")]
+        [SerializeField] private ShootingSounds _shootingSounds;
+        [SerializeField] private SoundManager _soundManager;
 
         [SerializeField] private LevelLogic _levelLogic;
         [SerializeField] private LevelSpawner _levelSpawner;
@@ -31,6 +34,7 @@ namespace Cannon_Test
             BindDeathAnimation();
             BindLevelLogic();
             BindManagers();
+            BindSounds();
         }
 
         private void BindInstallerInterfaces()
@@ -50,7 +54,7 @@ namespace Cannon_Test
             Container.Bind<ICoreFactory<PowerUpType>>().To<PowerUpFactory>().AsSingle().NonLazy();
             Container.Bind<ICoreFactory<ProjectileType>>().To<ProjectileFactory>().AsSingle().NonLazy();
 
-            Container.Bind<LevelSpawner>().FromComponentInNewPrefab(_levelSpawner).AsSingle().NonLazy();
+            Container.Bind<LevelSpawner>().FromComponentInHierarchy(_levelSpawner).AsSingle().NonLazy();
         }
 
         private void BindDeathAnimation()
@@ -59,7 +63,7 @@ namespace Cannon_Test
         }
         private void BindLevelLogic()
         {
-            Container.Bind<LevelLogic>().FromComponentInNewPrefab(_levelLogic).AsSingle().NonLazy();
+            Container.Bind<LevelLogic>().FromComponentInHierarchy(_levelLogic).AsSingle().NonLazy();
         }
 
         private void BindManagers()
@@ -67,6 +71,12 @@ namespace Cannon_Test
             Container.Bind<PoolManager>().AsSingle().NonLazy();
             Container.Bind<DeathAnimationManager>().AsSingle().NonLazy();
             Container.Bind<PowerUpManager>().FromComponentInNewPrefab(_powerUpManager).AsSingle().NonLazy();
+        }
+
+        private void BindSounds()
+        {
+            Container.Bind<ShootingSounds>().FromNewScriptableObject(_shootingSounds).AsSingle().NonLazy();
+            Container.Bind<SoundManager>().FromComponentInNewPrefab(_soundManager).AsSingle().NonLazy();
         }
     }
 }

@@ -9,16 +9,15 @@ namespace Cannon_Test
         [Inject] private PoolManager _poolManager;
         [Inject] private LevelLogic _levelLogic;
 
-        private float _enemyElapsedTime;
-        private float _powerUpElapsedTime;
+        [Header("SpawnTimer")]
         [SerializeField] private float _enemySpawnTimer;  //Seconds to spawn
         [SerializeField] private float _powerUpSpawnTimer;  //Seconds to spawn
+        private float _enemyElapsedTime;
+        private float _powerUpElapsedTime;
 
-        private void Awake()
-        {
-            _enemySpawnTimer = GetRandomFloat(3.0f, 5.0f);
-            _powerUpSpawnTimer = GetRandomFloat(10.0f, 15.0f);
-        }
+        [Header("SpawnZoneCoordinates")]
+        public Vector3 minCoordinates = new Vector3(-10f, 0.50f, 5.31f);
+        public Vector3 maxCoordinates = new Vector3(7.14f, 0.50f, 32.0f);
 
         //courutine
         //uniTask?
@@ -41,9 +40,8 @@ namespace Cannon_Test
             {
                 _enemyElapsedTime = 0;
 
-                var enemyObj = _poolManager.GetObject(GetRandomValueFromEnum<EnemyType>(), GetRandomPosition(), Quaternion.Euler(0, 180, 0));
-                //Debug.Log("spawning: " + obj.name);
-                enemyObj.SetActive(true);
+                var enemyObj = _poolManager.GetObject(GetRandomValueFromEnum<EnemyType>(), GetRandomPosition(minCoordinates, maxCoordinates), Quaternion.Euler(0, 180, 0));                
+                enemyObj.SetActive(true);                
             }
         }
         private void SpawnPowerUp()
@@ -54,7 +52,7 @@ namespace Cannon_Test
             {
                 _powerUpElapsedTime = 0;
 
-                var projectileObj = _poolManager.GetObject(GetRandomValueFromEnum<PowerUpType>(), GetRandomPosition(), Quaternion.Euler(0, 90, 0));
+                var projectileObj = _poolManager.GetObject(GetRandomValueFromEnum<PowerUpType>(), GetRandomPosition(minCoordinates,maxCoordinates), Quaternion.Euler(0, 90, 0));
                 projectileObj.SetActive(true);
             }
         }
@@ -67,9 +65,9 @@ namespace Cannon_Test
             var result = (T)Convert.ChangeType(randomValue, typeof(T));
             return result;
         }
-        public Vector3 GetRandomPosition()
-        {
-            var position = new Vector3(this.GetRandomFloat(-10.0f, 10.0f), 0.50f, GetRandomFloat(-0.9f, 3.8f));
+        public Vector3 GetRandomPosition(Vector3 minCoordinates, Vector3 maxCoordinates)
+        {   
+            var position = new Vector3(this.GetRandomFloat(minCoordinates.x, maxCoordinates.x), this.GetRandomFloat(minCoordinates.y, maxCoordinates.y), this.GetRandomFloat(minCoordinates.z, maxCoordinates.z));
             return position;
         }
         public float GetRandomFloat(float start, float end)

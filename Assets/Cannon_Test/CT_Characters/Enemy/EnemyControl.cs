@@ -23,13 +23,13 @@ namespace Cannon_Test
         private Animator _animator;
         private Collider _collider;
         [Inject] DeathAnimationManager _deathAnimationManager;
-        [SerializeField] private float _deathDelayTime = 3.0f;
+        private float _deathDelayTime = 1.7f;
         public TransitionParameter walkingType;
         [Inject] LevelLogic _levelLogic;
 
         [Header("Spawn")]
         public EnemyType enemyType;
-        [Inject] private LevelSpawner _spawner;
+        [Inject] private LevelSpawner _levelSpawner;
         private EnemyPoolObject _enemyPoolobject;
 
         [Header("Bools")]
@@ -39,9 +39,12 @@ namespace Cannon_Test
 
         [Inject] private PowerUpManager _powerUpManager;
 
+        public delegate void EnemyHandler(EnemyControl enemyControl);
+        public event EnemyHandler? OnEnemySpawned;
+        public event EnemyHandler? OnEnemyKilled;
+
         private void Awake()
         {
-            walkingType = GetRandomValueFromEnum<TransitionParameter>();
             _enemyPoolobject = GetComponent<EnemyPoolObject>();
             _animator = GetComponentInChildren<Animator>();
             _collider = GetComponentInChildren<Collider>();
@@ -49,7 +52,6 @@ namespace Cannon_Test
             _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
 
             SubscribeToPowerManager(_powerUpManager);
-
         }
         public void SubscribeToPowerManager(PowerUpManager powerUpManager)
         {
@@ -95,7 +97,7 @@ namespace Cannon_Test
         {
             _animator.runtimeAnimatorController = _deathAnimationManager.GetAnimator();
             yield return new WaitForSeconds(_deathDelayTime);
-            yield return new WaitForEndOfFrame();
+            //yield return new WaitForEndOfFrame();
             this.gameObject.SetActive(false);
         }
 
@@ -135,18 +137,22 @@ namespace Cannon_Test
 
         public void OnEnable()
         {
+            _levelLogic.SubscribeToEnemy(this);
+            OnEnemySpawned(this);
             _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
         }
 
         public void OnDisable()
         {
+            OnEnemyKilled(this);
             isKilled = false;
             GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
-            this.transform.position = _spawner.GetRandomPosition();
+            this.transform.position = _levelSpawner.GetRandomPosition(_levelSpawner.maxCoordinates, _levelSpawner.minCoordinates);
             _currentHealth = maxHealth;
             _collider.enabled = true;
             _enemyPoolobject.ReturnToPool();
             _animator.runtimeAnimatorController = _deathAnimationManager.GetDefaultAnimator();
+            walkingType = GetRandomValueFromEnum<TransitionParameter>();
         }
     }
 }

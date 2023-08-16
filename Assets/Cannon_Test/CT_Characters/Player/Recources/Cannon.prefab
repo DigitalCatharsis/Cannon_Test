@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cannonBallSpawnPoint: {fileID: 5537561984222209655}
-  cannonBallType: 0
+  cannonBallType: 1
   cannonBallSpeed: 5000
   cannonBallAttackDamage: 1
 --- !u!1 &3218523967381215075

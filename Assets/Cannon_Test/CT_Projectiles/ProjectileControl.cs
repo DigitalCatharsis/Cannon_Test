@@ -8,7 +8,7 @@ namespace Cannon_Test
     {
         [Inject] PlayerControl _playerControl;        
 
-        private float lifeTime = 2.0f;
+        private float lifeTime = 4.0f;
 
         private void OnCollisionEnter(Collision collider)
         {
