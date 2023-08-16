@@ -12,34 +12,26 @@ namespace Cannon_Test
 
         private void OnCollisionEnter(Collision collider)
         {
-            StopCoroutine(KillItselfOverTime());
-
             if (collider.transform.root.GetComponent<EnemyPoolObject>())
             {
                 collider.transform.root.GetComponent<EnemyControl>().OnGotHit();
                 KillItSelf();
             }
-
-            if (collider.transform.root.GetComponent<PowerUpPoolObject>())
+            else if (collider.transform.root.GetComponent<PowerUpPoolObject>())
             {
                 collider.transform.root.GetComponent<PowerUpControl>().InvokePowerUp();
                 collider.transform.root.GetComponent<PowerUpPoolObject>().ReturnToPool();
+                KillItSelf();
             }
-
-            KillItSelf();
-        }
-
-        private void Awake()
-        {
-            Debug.Log("Spawned");
-            //StartCoroutine(KillItselfOverTime());
+            else
+            {
+                KillItSelf();
+            }
         }
 
         private void KillItSelf()
         {
-            Debug.Log("Killing Itself");
             this.gameObject.transform.root.GetComponent<ProjectilePoolObject>().ReturnToPool();
-            Debug.Log("Added myself to PoolManager");
             this.gameObject.SetActive(false);
         }
 
@@ -51,11 +43,12 @@ namespace Cannon_Test
 
         public void OnEnable()
         {
-            
+            StartCoroutine(KillItselfOverTime());
+            this.gameObject.transform.position = _playerControl._cannonBallSpawnPoint.position;
         }
         public void OnDisable()
         {
-            this.gameObject.transform.position = _playerControl._cannonBallSpawnPoint.position;
+            
         }
     }
 }
