@@ -16,8 +16,8 @@ namespace Cannon_Test
         private float _powerUpElapsedTime;
 
         [Header("SpawnZoneCoordinates")]
-        public Vector3 minCoordinates = new Vector3(-10f, 0.50f, 5.31f);
-        public Vector3 maxCoordinates = new Vector3(7.14f, 0.50f, 32.0f);
+        public Vector3 minCoordinates = new Vector3(-10f, 0.50f, -0.9f);
+        public Vector3 maxCoordinates = new Vector3(10, 0.50f, 3.81f);
 
         //courutine
         //uniTask?

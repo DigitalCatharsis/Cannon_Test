@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Runtime.InteropServices;
-using Unity.VisualScripting;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -9,20 +8,48 @@ namespace Cannon_Test
     public class SoundManager : MonoBehaviour
     {
         [Inject] private PlayerControl _playerControl;
-        [Inject] private ShootingSounds _shootingSounds;
 
-        private AudioClip _audioData;
-        private AudioSource _audioSource = new AudioSource();
-        private float _volumeScale = 100.0f;
+        [Header("Sound Collections")]
+        [SerializeField] private SoundClipsCollection _shootingSounds;
+        [SerializeField] private SoundClipsCollection _musicSounds;
+        [SerializeField] private SoundClipsCollection _powerUpSounds;
 
-        public AudioClip AudioData;
+        [Header("AudioSources")]
+        [SerializeField] private AudioSource _shootAudioSource;
+        [SerializeField] private AudioSource _musicAudioSource;
+        [SerializeField] private AudioSource _powerUpAudioSource;
 
-        private void Awake()
+        public void SubscribeToPowerUp(PowerUpControl powerUpControl)
         {
-            _audioData = _shootingSounds.audioClips[0];
-            _audioSource.PlayOneShot(_audioData, _volumeScale);  //???????????????????????????
-            //_volumeScale = 1.0f;
-            //Debug.Log("Сука, ну остановить!");
+            powerUpControl.OnInvokePowerUp += PlayPowerUpSound;
+        }
+        public void UnsubscribeFromPowerUp(PowerUpControl powerUpControl)
+        {
+            powerUpControl.OnInvokePowerUp -= PlayPowerUpSound;
+        }
+
+        public void ShootSound()
+        {
+            _shootAudioSource.PlayOneShot(GetRandomAudioClip(_shootingSounds), _shootAudioSource.volume);
+        }
+        public void GetPowerUpSound(string powerUpType)
+        {
+            AudioClip audioClip = _powerUpSounds.audioClips.Find(x => x.name == powerUpType);
+
+            _powerUpAudioSource.PlayOneShot(audioClip, 0.7F);
+            Debug.Log(_powerUpAudioSource.volume);
+        }
+
+        public void PlayPowerUpSound(PowerUpControl powerUpControl, PowerUpType powerUpType)
+        {
+            GetPowerUpSound(powerUpType.ToString());
+        }
+
+        private AudioClip GetRandomAudioClip(SoundClipsCollection clipsCollection)
+        {
+            var randomIndex = UnityEngine.Random.Range(0, (clipsCollection.audioClips.Count - 1));
+            var randomValue = _shootingSounds.audioClips[randomIndex];
+            return randomValue;
         }
 
     }

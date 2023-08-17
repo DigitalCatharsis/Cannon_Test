@@ -6,6 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     [Inject] private PoolManager _poolManager;
     [Inject] private LevelLogic _levelLogic;
+    [Inject] private SoundManager _soundManager;
 
     [Header("MousePosition")]
     private Vector3 _screenPosition;
@@ -36,6 +37,8 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 OnShooting?.Invoke();
+                _soundManager.ShootSound();
+
                 //почему-то первый летит быстрее остальных???? WTF?
                 var cannonBall = _poolManager.GetObject(cannonBallType, _cannonBallSpawnPoint.transform.position, Quaternion.Euler(32, 90, -15));
                 cannonBall.SetActive(true);

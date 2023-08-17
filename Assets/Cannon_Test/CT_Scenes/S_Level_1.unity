@@ -2399,7 +2399,6 @@ MonoBehaviour:
   _playerLocation: {fileID: 338543207}
   _deathAnimationLoader: {fileID: 8018260558184000952, guid: 533435d710fcecc4fad709a1341cab82, type: 3}
   _powerUpManager: {fileID: 1937246167231546084, guid: 2c50abfdbc4e9d648a8260a86f352436, type: 3}
-  _shootingSounds: {fileID: 11400000, guid: df04d98ebeb242b4199b0eed088d5c3e, type: 2}
   _soundManager: {fileID: 3608540960892092576, guid: 0d31ff3e102f07f46850a25cb16fdf61, type: 3}
   _levelLogic: {fileID: 4839976445273619171, guid: 3f1a85277a1d6c94399029328aefa235, type: 3}
   _levelSpawner: {fileID: 6077542762086002942, guid: 9bfc33211bd5f514bb31383c8b672024, type: 3}
@@ -3321,10 +3320,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3608540960892092576, guid: 0d31ff3e102f07f46850a25cb16fdf61, type: 3}
-      propertyPath: AudioData
+    - target: {fileID: 1592758981, guid: 0d31ff3e102f07f46850a25cb16fdf61, type: 3}
+      propertyPath: OutputAudioMixerGroup
       value: 
-      objectReference: {fileID: 8300000, guid: 19a988eadc5c54e44aecfb2452036944, type: 3}
+      objectReference: {fileID: -4224042992288464074, guid: 3eefc70e290e22c4aa07e52df4b9c80b, type: 2}
+    - target: {fileID: 1750252767, guid: 0d31ff3e102f07f46850a25cb16fdf61, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5424302741935932888, guid: 0d31ff3e102f07f46850a25cb16fdf61, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -3710,14 +3713,6 @@ PrefabInstance:
     - target: {fileID: 5328429387840751977, guid: 9bfc33211bd5f514bb31383c8b672024, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6077542762086002942, guid: 9bfc33211bd5f514bb31383c8b672024, type: 3}
-      propertyPath: _enemySpawnTimer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6077542762086002942, guid: 9bfc33211bd5f514bb31383c8b672024, type: 3}
-      propertyPath: _powerUpSpawnTimer
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7974816466188899428, guid: 9bfc33211bd5f514bb31383c8b672024, type: 3}
       propertyPath: m_Name

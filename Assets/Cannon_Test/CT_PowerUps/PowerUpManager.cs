@@ -15,11 +15,11 @@ namespace Cannon_Test
             NotifyFreeze.Invoke();
         }
 
-        public void SubscribeToPowerUp(PowerUpControl powerUp)
+        public void SubscribeToPowerUp(PowerUpControl powerUp, PowerUpType type)
         {
             powerUp.OnInvokePowerUp += ExecutePowerUp;
         }
-        public void UnsubscribeFromPowerUp(PowerUpControl powerUp)
+        public void UnsubscribeFromPowerUp(PowerUpControl powerUp, PowerUpType type)
         {
             powerUp.OnInvokePowerUp -= ExecutePowerUp;
         }

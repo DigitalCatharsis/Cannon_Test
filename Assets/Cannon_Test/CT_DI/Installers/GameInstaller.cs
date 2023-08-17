@@ -20,7 +20,8 @@ namespace Cannon_Test
         [SerializeField] private PowerUpManager _powerUpManager;
 
         [Header("Sound)")]
-        [SerializeField] private ShootingSounds _shootingSounds;
+        //[SerializeField] private SoundClipsCollection _shootingSounds;
+        //[SerializeField] private SoundClipsCollection _musicSounds;
         [SerializeField] private SoundManager _soundManager;
 
         [SerializeField] private LevelLogic _levelLogic;
@@ -75,8 +76,9 @@ namespace Cannon_Test
 
         private void BindSounds()
         {
-            Container.Bind<ShootingSounds>().FromNewScriptableObject(_shootingSounds).AsSingle().NonLazy();
-            Container.Bind<SoundManager>().FromComponentInNewPrefab(_soundManager).AsSingle().NonLazy();
+            //Container.Bind<SoundClipsCollection>().FromNewScriptableObject(_shootingSounds).AsSingle().NonLazy();
+            //Container.Bind<SoundClipsCollection>().FromNewScriptableObject(_musicSounds).AsSingle().NonLazy();
+            Container.Bind<SoundManager>().FromComponentInHierarchy(_soundManager).AsSingle().NonLazy();
         }
     }
 }
