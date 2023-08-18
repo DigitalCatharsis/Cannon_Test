@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Cannon_Test/CT_Scenes/S_MainMenu.unity
     guid: d2ffdd4333eb3fe4c950affb5ac0d5c0
   - enabled: 1
-    path: Assets/Cannon_Test/CT_Scenes/S_Level_1.unity
+    path: Assets/UnityStoreAssets/Cowboy Hat/Prefab/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

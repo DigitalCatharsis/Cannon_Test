@@ -43,16 +43,16 @@ namespace Cannon_Test
         {
             _enemyCount++;
         }
-        public void RemoveEnemyFromCounter(EnemyControl enemyControl)
-        {
-            _enemyCount--;
-            enemyControl.OnEnemySpawned -= AddEnemyToCounter;
-            enemyControl.OnEnemyKilled -= RemoveEnemyFromCounter;
-        }
-        public void SubscribeToEnemy(EnemyControl enemyControl)
-        {
-            enemyControl.OnEnemySpawned += AddEnemyToCounter;
-            enemyControl.OnEnemyKilled += RemoveEnemyFromCounter;
-        }
+        //public void RemoveEnemyFromCounter(EnemyControl enemyControl)
+        //{
+        //    _enemyCount--;
+        //    enemyControl.OnEnemySpawned -= AddEnemyToCounter;
+        //    enemyControl.OnEnemyKilled -= RemoveEnemyFromCounter;
+        //}
+        //public void SubscribeToEnemy(EnemyControl enemyControl)
+        //{
+        //    enemyControl.OnEnemySpawned += AddEnemyToCounter;
+        //    enemyControl.OnEnemyKilled += RemoveEnemyFromCounter;
+        //}
     }
 }

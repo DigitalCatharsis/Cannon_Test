@@ -6,7 +6,8 @@ namespace Cannon_Test
 {
     public class ProjectileControl : MonoBehaviour, IPooledHittingObject
     {
-        [Inject] PlayerControl _playerControl;        
+        [Inject] PlayerControl _playerControl;
+        [Inject] PowerUpManager _powerUpManager;
 
         private float lifeTime = 4.0f;
 
@@ -19,7 +20,8 @@ namespace Cannon_Test
             }
             else if (collider.transform.root.GetComponent<PowerUpPoolObject>())
             {
-                collider.transform.root.GetComponent<PowerUpControl>().InvokePowerUp();
+                var powerUpType = collider.transform.root.GetComponent<PowerUpControl>();
+                _powerUpManager.ExecutePowerUp(powerUpType );
                 collider.transform.root.GetComponent<PowerUpPoolObject>().ReturnToPool();
                 KillItSelf();
             }

@@ -6,37 +6,40 @@ namespace Cannon_Test
 { public class PowerUpManager : MonoBehaviour
     {
         [Inject] private LevelLogic _levelLogic;
+        [Inject] private SoundManager _soundManager;
 
-        public delegate void FreezeHandler();
-        public event FreezeHandler? NotifyFreeze;
+        //public delegate void FreezeHandler();
+        //public event FreezeHandler? NotifyFreeze;
 
-        public void Invoke_FreezeStatusChanged()
-        {
-            NotifyFreeze.Invoke();
-        }
+        //public void Invoke_FreezeStatusChanged()
+        //{
+        //    NotifyFreeze.Invoke();
+        //}
 
-        public void SubscribeToPowerUp(PowerUpControl powerUp, PowerUpType type)
-        {
-            powerUp.OnInvokePowerUp += ExecutePowerUp;
-        }
-        public void UnsubscribeFromPowerUp(PowerUpControl powerUp, PowerUpType type)
-        {
-            powerUp.OnInvokePowerUp -= ExecutePowerUp;
-        }
+        //public void SubscribeToPowerUp(PowerUpControl powerUp, PowerUpType type)
+        //{
+        //    powerUp.OnInvokePowerUp += ExecutePowerUp;
+        //}
+        //public void UnsubscribeFromPowerUp(PowerUpControl powerUp, PowerUpType type)
+        //{
+        //    powerUp.OnInvokePowerUp -= ExecutePowerUp;
+        //}
 
-        public void ExecutePowerUp(PowerUpControl powerUp, PowerUpType _powerUpType)
+        public void ExecutePowerUp(PowerUpControl powerUp)
         {
+            _soundManager.PlayPowerUpSound(powerUp);
             EnemyControl[] enemiesControlls = FindObjectsOfType<EnemyControl>();
 
-            switch (_powerUpType)
+            switch (powerUp._powerUpType)
             {
                 case PowerUpType.FreezeTimer:
                     {
+                        StopAllCoroutines();
                         _levelLogic.StartFreezeTimer();
+                        StartCoroutine(FreezeGlobalAnimation(enemiesControlls));
                         foreach (var enemy in enemiesControlls)
                         {
-                            Animator anim = enemy.transform.root.GetComponentInChildren<Animator>();
-                            StartCoroutine(FreezeAnimation(anim));
+                            enemy.OnFreezeStatusChanges();
                         }
                         break;
                     }
@@ -54,14 +57,18 @@ namespace Cannon_Test
             }            
         }
 
-        public IEnumerator FreezeAnimation(Animator anim)
+        public IEnumerator FreezeGlobalAnimation(EnemyControl[] enemiesControlls)
         {
             _levelLogic.FreezeGlobalAnimatorSpeed();  //We set it to zero to make sure that turned on and new object had the same speed
-            Invoke_FreezeStatusChanged();
+            _levelLogic.StartFreezeTimer();
             yield return new WaitForSeconds(_levelLogic.CurrentGlobalFreezeTimer);
             _levelLogic.ResetGlobalAnimatorSpeed();
             _levelLogic.ResetFreezeTimer();
-            Invoke_FreezeStatusChanged();
+
+            foreach (var elem in enemiesControlls)
+            {
+                elem.OnFreezeStatusChanges();
+            }
         }
     }
 }

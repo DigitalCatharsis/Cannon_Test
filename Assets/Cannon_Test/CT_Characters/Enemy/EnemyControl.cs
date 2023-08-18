@@ -38,10 +38,11 @@ namespace Cannon_Test
         public bool isMoving;
 
         [Inject] private PowerUpManager _powerUpManager;
+        [Inject] private SoundManager _soundManager;
 
-        public delegate void EnemyHandler(EnemyControl enemyControl);
-        public event EnemyHandler? OnEnemySpawned;
-        public event EnemyHandler? OnEnemyKilled;
+        //public delegate void EnemyHandler(EnemyControl enemyControl);
+        //public event EnemyHandler? OnEnemySpawned;
+        //public event EnemyHandler? OnEnemyKilled;
 
         private void Awake()
         {
@@ -51,14 +52,14 @@ namespace Cannon_Test
             _currentHealth = maxHealth;
             _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
 
-            SubscribeToPowerManager(_powerUpManager);
+            //SubscribeToPowerManager(_powerUpManager);
         }
-        public void SubscribeToPowerManager(PowerUpManager powerUpManager)
-        {
-            _powerUpManager.NotifyFreeze += OnFreezeStatusChanges;
-        }
+        //public void SubscribeToPowerManager(PowerUpManager powerUpManager)
+        //{
+        //    _powerUpManager.NotifyFreeze += OnFreezeStatusChanges;
+        //}
 
-        private void OnFreezeStatusChanges()
+        public void OnFreezeStatusChanges()
         {
             _isFreezed = _levelLogic.IsTimerFreezed;
             _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
@@ -66,6 +67,8 @@ namespace Cannon_Test
 
         public void OnGotHit(bool instaKill = false)
         {
+            _soundManager.PlayHitSound();
+
             if (instaKill)
             {
                 OnGotKilled();
@@ -97,7 +100,6 @@ namespace Cannon_Test
         {
             _animator.runtimeAnimatorController = _deathAnimationManager.GetAnimator();
             yield return new WaitForSeconds(_deathDelayTime);
-            //yield return new WaitForEndOfFrame();
             this.gameObject.SetActive(false);
         }
 
@@ -137,14 +139,14 @@ namespace Cannon_Test
 
         public void OnEnable()
         {
-            _levelLogic.SubscribeToEnemy(this);
-            OnEnemySpawned(this);
+            //_levelLogic.SubscribeToEnemy(this);
+            //OnEnemySpawned(this);
             _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
         }
 
         public void OnDisable()
         {
-            OnEnemyKilled(this);
+            //OnEnemyKilled(this);
             isKilled = false;
             GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
             this.transform.position = _levelSpawner.GetRandomPosition(_levelSpawner.maxCoordinates, _levelSpawner.minCoordinates);
