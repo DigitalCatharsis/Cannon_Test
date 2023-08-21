@@ -26,14 +26,16 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
-        RotatePlayerActor();
+        if (!_levelLogic.IsOnMenu && !_levelLogic.isGameOver)
+        {
+            RotatePlayerActor();
 
-        Shoot();
+            Shoot();
+        }
     }
     private void Shoot()
     {
-        if (!_levelLogic.IsOnMenu)
-        {
+
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 OnShooting?.Invoke();
@@ -44,7 +46,6 @@ public class PlayerControl : MonoBehaviour
                 cannonBall.SetActive(true);
                 cannonBall.GetComponent<Rigidbody>().velocity = _cannonBallSpawnPoint.transform.forward * cannonBallSpeed * Time.deltaTime;
             }
-        }
     }
 
     private void RotatePlayerActor()

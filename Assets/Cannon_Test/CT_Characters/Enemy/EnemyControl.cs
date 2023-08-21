@@ -25,7 +25,6 @@ namespace Cannon_Test
         [Inject] DeathAnimationManager _deathAnimationManager;
         private float _deathDelayTime = 1.7f;
         public TransitionParameter walkingType;
-        [Inject] LevelLogic _levelLogic;
 
         [Header("Spawn")]
         public EnemyType enemyType;
@@ -37,7 +36,7 @@ namespace Cannon_Test
         private bool _isFreezed = false;
         public bool isMoving;
 
-        [Inject] private PowerUpManager _powerUpManager;
+        [Inject] LevelLogic _levelLogic;
         [Inject] private SoundManager _soundManager;
 
         //public delegate void EnemyHandler(EnemyControl enemyControl);
@@ -101,6 +100,7 @@ namespace Cannon_Test
             _animator.runtimeAnimatorController = _deathAnimationManager.GetAnimator();
             yield return new WaitForSeconds(_deathDelayTime);
             this.gameObject.SetActive(false);
+            _levelLogic.RemoveEnemyFromCounter();
         }
 
         IEnumerator WaitForUnfreeze()
@@ -139,6 +139,7 @@ namespace Cannon_Test
 
         public void OnEnable()
         {
+            _levelLogic.AddEnemyToCounterAndCheckLoseCondition();
             //_levelLogic.SubscribeToEnemy(this);
             //OnEnemySpawned(this);
             _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;

@@ -1684,7 +1684,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   ragdollTriggered: 0
-  _deathDelayTime: 3
   walkingType: 2
   enemyType: 1
   isKilled: 0

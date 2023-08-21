@@ -1,17 +1,29 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Cannon_Test
 {
     public class LevelLogic : MonoBehaviour
     {
+        [Header("Animation and PowerUps")]
         [SerializeField] private float _defaultGlobalEnemyAnimatorSpeed;
         [SerializeField] private float _currentGlobalEnemyAnimatorSpeed;
         [SerializeField] private float _currentGlobalFreezeTime;
-        [SerializeField] private float _maxFreezeTime;
+        [SerializeField] private float _maxFreezeTime;  //По ТЗ нужно 3 секунды, но 4 так хорошо ложились под звук powerUp'а :D.  Спокойно можно поменять на 3
         [SerializeField] private bool _isTimerFreezed;
-        [SerializeField] private int _enemyCount;
 
+        [Header("UI")]
+        [SerializeField] private int _enemyCount;
+        [SerializeField] private GameObject _deathUiGameObject;
+
+        [Header("Bools")]
         public bool IsOnMenu;
+        public bool isGameOver;
+
+        [Header("Etc")]
+        [SerializeField] private float _secondsUntillRestart = 8;
+        [SerializeField] private string _mainMenuName = "S_MainMenu";
+
 
         public float CurrentGlobalEnemyAnimatorSpeed { get => _currentGlobalEnemyAnimatorSpeed; private set => _currentGlobalEnemyAnimatorSpeed = value; }
         public float DefaultGlobalEnemyAnimatorSpeed { get => _defaultGlobalEnemyAnimatorSpeed; private set => _defaultGlobalEnemyAnimatorSpeed = value; }
@@ -19,6 +31,17 @@ namespace Cannon_Test
         public float MaxGlobalFreezeTimer { get => _currentGlobalFreezeTime; private set => _currentGlobalFreezeTime = value; }
         public bool IsTimerFreezed { get => _isTimerFreezed; private set => _isTimerFreezed = false; }
         public int EnemyCount { get => _enemyCount; private set => EnemyCount = value; }
+
+        IEnumerator WaitAndGoToMenu()
+        {
+            yield return new WaitForSeconds(_secondsUntillRestart);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(_mainMenuName);
+        }
+
+        public void GameOverAndRestart()
+        {
+            _deathUiGameObject.SetActive(true);
+        }
 
         public void StartFreezeTimer()
         {
@@ -38,21 +61,33 @@ namespace Cannon_Test
         {
             _currentGlobalEnemyAnimatorSpeed = 0.0f;
         }
-
-        public void AddEnemyToCounter(EnemyControl enemyControl)
+        public void AddEnemyToCounterAndCheckLoseCondition()
         {
             _enemyCount++;
+            if(_enemyCount >= 10)
+            {
+                isGameOver = true;
+                GameOverAndRestart();
+                StartCoroutine(WaitAndGoToMenu());
+            }
         }
-        //public void RemoveEnemyFromCounter(EnemyControl enemyControl)
+        public void RemoveEnemyFromCounter()
+        {
+            _enemyCount--;
+        }
+
+
+        //public void PauseGame()
         //{
-        //    _enemyCount--;
-        //    enemyControl.OnEnemySpawned -= AddEnemyToCounter;
-        //    enemyControl.OnEnemyKilled -= RemoveEnemyFromCounter;
+        //    Time.timeScale = 0;
         //}
-        //public void SubscribeToEnemy(EnemyControl enemyControl)
+        //public void ResumeGame()
         //{
-        //    enemyControl.OnEnemySpawned += AddEnemyToCounter;
-        //    enemyControl.OnEnemyKilled += RemoveEnemyFromCounter;
+        //    Time.timeScale = 1;
         //}
+
+        //public delegate void GameOverHandler();
+        //public event GameOverHandler? GameOver;
+
     }
 }

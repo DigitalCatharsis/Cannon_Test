@@ -1,30 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Cannon_Test
 {
-    public enum UIPrameters
-    {
-        ScaleUp, 
-    }
-
     public class ButtonScale : MonoBehaviour
     {
-        private GameEventListener listener;
+        private GameEventListener _listener;
 
         private void Awake()
         {
-            listener = gameObject.GetComponent<GameEventListener>();
+            _listener = gameObject.GetComponent<GameEventListener>();
         }
         public void ScaleUpButton()
         {
-            listener.gameEvent.eventObj.GetComponent<Animator>().SetBool(UIPrameters.ScaleUp.ToString(), true);
+            _listener.gameEvent.eventObj.GetComponent<Animator>().SetBool(UIPrameters.ScaleUp.ToString(), true);
         }
 
         public void ResetButtonScale()
         {
-            listener.gameEvent.eventObj.GetComponent<Animator>().SetBool(UIPrameters.ScaleUp.ToString(), false);
+            _listener.gameEvent.eventObj.GetComponent<Animator>().SetBool(UIPrameters.ScaleUp.ToString(), false);
         }
     }
 }
