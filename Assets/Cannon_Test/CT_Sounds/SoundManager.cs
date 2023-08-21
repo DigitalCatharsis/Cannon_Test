@@ -16,13 +16,17 @@ namespace Cannon_Test
         [SerializeField] private SoundClipsCollection _powerUpSounds;
         [SerializeField] private SoundClipsCollection _hitSounds;
         [SerializeField] private SoundClipsCollection _playerDeathSounds;
+        [SerializeField] private SoundClipsCollection _creditsSounds;
+        [SerializeField] private SoundClipsCollection _leaderboardAudioSounds;
 
         [Header("AudioSources")]
-        [SerializeField] private AudioSource _shootAudioSource;
         [SerializeField] private AudioSource _musicAudioSource;
+        [SerializeField] private AudioSource _shootAudioSource;
         [SerializeField] private AudioSource _powerUpAudioSource;
         [SerializeField] private AudioSource _hitAudioSource;
         [SerializeField] private AudioSource _playerDeathAudioSource;
+        [SerializeField] private AudioSource _creditsAudioSource;
+        [SerializeField] private AudioSource _leaderboardAudioSource;
 
         //public void SubscribeToPowerUp(PowerUpControl powerUpControl)
         //{
@@ -48,6 +52,11 @@ namespace Cannon_Test
         {
             GetPowerUpSound(powerUpControl._powerUpType.ToString());
         }
+        public void PlayCreditsMusic()
+        {
+            _creditsAudioSource.pitch = (Random.Range(0.6f, 0.9f));
+            _creditsAudioSource.PlayOneShot(GetRandomAudioClip(_creditsSounds), _creditsAudioSource.volume);
+        }
 
         public void PlayHitSound()
         {
@@ -65,7 +74,7 @@ namespace Cannon_Test
             }
         }
 
-        private void StopAllAudioSourceBut(AudioSource audioSource)
+        public void StopAllAudioSourceBut(AudioSource? audioSource = null)
         {
             var list = gameObject.GetComponentsInChildren<AudioSource>();
             foreach (var elem in list)

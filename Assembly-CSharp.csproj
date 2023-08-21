@@ -73,6 +73,7 @@
     <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\ProjectileSpawn\ProjectileType.cs" />
     <Compile Include="Assets\Cannon_Test\CT_ObjectPooling\EnemyPoolObject.cs" />
     <Compile Include="Assets\Cannon_Test\CT_ObjectPooling\IPoolObject.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_UI\CT_GameEvents\GameOver.cs" />
     <Compile Include="Assets\Cannon_Test\CT_Characters\Enemy\Death\DeathAnimationManager.cs" />
     <Compile Include="Assets\Cannon_Test\CT_Sounds\SoundClipsCollection.cs" />
     <Compile Include="Assets\Cannon_Test\CT_DI\Installers\GameInstaller.cs" />
@@ -93,7 +94,12 @@
     <Compile Include="Assets\Cannon_Test\CT_ObjectPooling\IHittingObject.cs" />
     <Compile Include="Assets\Cannon_Test\CT_Characters\Enemy\EnemyControl.cs" />
     <Compile Include="Assets\Cannon_Test\CT_DI\CT_Spawner\ProjectileSpawn\ProjectileFactory.cs" />
-    <Compile Include="Assets\Cannon_Test\CT_UI\CT_GameEvents\GameOver.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_UI\ScoreData.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_UI\SetLeaderBoard.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_UI\CT_MenuEvents\ReturnToMainMenu.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_UI\CT_MenuEvents\ShowBoard.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_UI\CT_MenuEvents\ShowCredits.cs" />
+    <Compile Include="Assets\Cannon_Test\CT_UI\CT_MenuEvents\ExitGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -22,7 +22,10 @@ namespace Cannon_Test
         [Header("Sound)")]
         //[SerializeField] private SoundClipsCollection _shootingSounds;
         //[SerializeField] private SoundClipsCollection _musicSounds;
-        [SerializeField] private SoundManager _soundManager;
+        private SoundManager _soundManager;
+
+        [Header("UI")]
+        [SerializeField] private ScoreData _scoreData;
 
         [SerializeField] private LevelLogic _levelLogic;
         [SerializeField] private LevelSpawner _levelSpawner;
@@ -36,6 +39,7 @@ namespace Cannon_Test
             BindLevelLogic();
             BindManagers();
             BindSounds();
+            BindUI();
         }
 
         private void BindInstallerInterfaces()
@@ -72,6 +76,10 @@ namespace Cannon_Test
             Container.Bind<PoolManager>().AsSingle().NonLazy();
             Container.Bind<DeathAnimationManager>().AsSingle().NonLazy();
             Container.Bind<PowerUpManager>().FromComponentInNewPrefab(_powerUpManager).AsSingle().NonLazy();
+        }
+        private void BindUI()
+        {
+            Container.Bind<ScoreData>().FromScriptableObject(_scoreData).AsSingle().NonLazy();
         }
 
         private void BindSounds()
