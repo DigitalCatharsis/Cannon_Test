@@ -27,7 +27,7 @@ namespace Cannon_Test
 
         public void PlayDeathSound()
         {
-            _soundManager.PlayerDeathSound();
+            _soundManager.PlaySound(AudioSourceType.PLAYER_DEATH);
         }
     }
 }

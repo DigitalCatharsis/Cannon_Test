@@ -9,7 +9,7 @@ public class ScoreData : ScriptableObject
     {
         {9999, "DIO JACKSON"},
         {6666, "MICHAEL BRANDO"},
-        {200, "JONARHAN JACKSTAR"},
+        {200, "JONATHAN JACKSTAR"},
         {150,"JHOZEF JACKSTAR"},
         {100,"JOTARO KUKSON"},
         {10, "JOLENE KUKSON"},

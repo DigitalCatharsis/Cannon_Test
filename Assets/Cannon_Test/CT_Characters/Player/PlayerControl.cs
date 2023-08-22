@@ -36,16 +36,15 @@ public class PlayerControl : MonoBehaviour
     private void Shoot()
     {
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                OnShooting?.Invoke();
-                _soundManager.ShootSound();
-
-                //почему-то первый летит быстрее остальных???? WTF?
-                var cannonBall = _poolManager.GetObject(cannonBallType, _cannonBallSpawnPoint.transform.position, Quaternion.Euler(32, 90, -15));
-                cannonBall.SetActive(true);
-                cannonBall.GetComponent<Rigidbody>().velocity = _cannonBallSpawnPoint.transform.forward * cannonBallSpeed * Time.deltaTime;
-            }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            OnShooting?.Invoke();
+            _soundManager.PlaySound(AudioSourceType.SHOOT);
+            //почему-то первый летит быстрее остальных???? WTF?
+            var cannonBall = _poolManager.GetObject(cannonBallType, _cannonBallSpawnPoint.transform.position, Quaternion.Euler(32, 90, -15));
+            cannonBall.SetActive(true);
+            cannonBall.GetComponent<Rigidbody>().velocity = _cannonBallSpawnPoint.transform.forward * cannonBallSpeed * Time.deltaTime;
+        }
     }
 
     private void RotatePlayerActor()

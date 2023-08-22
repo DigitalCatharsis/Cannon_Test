@@ -66,7 +66,7 @@ namespace Cannon_Test
 
         public void OnGotHit(bool instaKill = false)
         {
-            _soundManager.PlayHitSound();
+            _soundManager.PlaySound(AudioSourceType.HIT, true);
 
             if (instaKill)
             {
@@ -75,12 +75,12 @@ namespace Cannon_Test
 
             _currentHealth -= 1;
 
-            if (_currentHealth <= 0) 
+            if (_currentHealth <= 0)
             {
                 OnGotKilled();
             }
         }
-        
+
         private void OnGotKilled()
         {
             isKilled = true;
@@ -108,7 +108,7 @@ namespace Cannon_Test
             while (_isFreezed)
             {
                 yield return null;
-            }            
+            }
             StartCoroutine(Death());
         }
 
@@ -139,23 +139,28 @@ namespace Cannon_Test
 
         public void OnEnable()
         {
-            _levelLogic.AddEnemyToCounterAndCheckLoseCondition();
-            //_levelLogic.SubscribeToEnemy(this);
-            //OnEnemySpawned(this);
-            _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
+            if (!_levelLogic.IsOnMenu)
+            {
+                _levelLogic.AddEnemyToCounterAndCheckLoseCondition();
+                //_levelLogic.SubscribeToEnemy(this);
+                //OnEnemySpawned(this);
+                _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
+            }
         }
 
         public void OnDisable()
         {
-            //OnEnemyKilled(this);
-            isKilled = false;
-            GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
-            this.transform.position = _levelSpawner.GetRandomPosition(_levelSpawner.maxCoordinates, _levelSpawner.minCoordinates);
-            _currentHealth = maxHealth;
-            _collider.enabled = true;
-            _enemyPoolobject.ReturnToPool();
-            _animator.runtimeAnimatorController = _deathAnimationManager.GetDefaultAnimator();
-            walkingType = GetRandomValueFromEnum<TransitionParameter>();
+            if (!_levelLogic.IsOnMenu)
+            {
+                isKilled = false;
+                GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
+                this.transform.position = _levelSpawner.GetRandomPosition(_levelSpawner.maxCoordinates, _levelSpawner.minCoordinates);
+                _currentHealth = maxHealth;
+                _collider.enabled = true;
+                _enemyPoolobject.ReturnToPool();
+                _animator.runtimeAnimatorController = _deathAnimationManager.GetDefaultAnimator();
+                walkingType = GetRandomValueFromEnum<TransitionParameter>();
+            }
         }
     }
 }

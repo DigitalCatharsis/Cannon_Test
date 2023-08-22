@@ -1,4 +1,3 @@
-using Cannon_Test;
 using UnityEngine;
 using Zenject;
 
@@ -6,25 +5,22 @@ namespace Cannon_Test
 {
     public class ShowBoard : MonoBehaviour
     {
-        public class ButtonScale : MonoBehaviour
-        {
-            [Inject] private SoundManager _soundManager;
+        [Inject] private SoundManager _soundManager;
 
-            [SerializeField] private GameObject _mainMenu;
-            [SerializeField] private GameObject _boardToOpen;
-            [SerializeField] private AudioSource? _audioSource;
+        [SerializeField] private GameObject _boardToDisable;
+        [SerializeField] private GameObject _boardToOpen;
+        [SerializeField] private AudioSourceType _audioSourceType;
+        [SerializeField] private bool _makeItPitched = false;
 
-            public void ShowBoardFunc()
+        public void ShowBoardFunc()
+        {            
+            _soundManager.DisableAllAudioSourceExceptThisOne(_audioSourceType);
+            _boardToOpen.gameObject.SetActive(true);
+            if (_audioSourceType != null)
             {
-                _mainMenu.gameObject.SetActive(false);
-                _soundManager.StopAllAudioSourceBut();
-                _boardToOpen.gameObject.SetActive(true);
-                if (_audioSource != null ) 
-                {
-                    _soundManager.play
-                }
-                
+                _soundManager.PlaySound(_audioSourceType, _makeItPitched);
             }
+            _boardToDisable.gameObject.SetActive(false);
         }
     }
 }

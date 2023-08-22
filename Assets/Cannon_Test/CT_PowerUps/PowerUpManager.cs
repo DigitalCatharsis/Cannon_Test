@@ -27,7 +27,7 @@ namespace Cannon_Test
 
         public void ExecutePowerUp(PowerUpControl powerUp)
         {
-            _soundManager.PlayPowerUpSound(powerUp);
+            _soundManager.PlaySound(AudioSourceType.POWERUP,false,powerUp._powerUpType);
             EnemyControl[] enemiesControlls = FindObjectsOfType<EnemyControl>();
 
             switch (powerUp._powerUpType)
