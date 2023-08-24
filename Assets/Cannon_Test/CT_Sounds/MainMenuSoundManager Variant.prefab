@@ -7,6 +7,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1750252765, guid: 0d31ff3e102f07f46850a25cb16fdf61, type: 3}
+      propertyPath: m_Name
+      value: LevelMusictAudioSource
+      objectReference: {fileID: 0}
+    - target: {fileID: 3608540960892092576, guid: 0d31ff3e102f07f46850a25cb16fdf61, type: 3}
+      propertyPath: _levelMusicSounds
+      value: 
+      objectReference: {fileID: 11400000, guid: d6375cef3eb3020469cc9a5baf32bb7e, type: 2}
+    - target: {fileID: 3608540960892092576, guid: 0d31ff3e102f07f46850a25cb16fdf61, type: 3}
+      propertyPath: _levelMusicAudioSource
+      value: 
+      objectReference: {fileID: 3522934688905427473}
     - target: {fileID: 5424302741935932888, guid: 0d31ff3e102f07f46850a25cb16fdf61, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -57,3 +69,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d31ff3e102f07f46850a25cb16fdf61, type: 3}
+--- !u!82 &3522934688905427473 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1750252767, guid: 0d31ff3e102f07f46850a25cb16fdf61, type: 3}
+  m_PrefabInstance: {fileID: 3522934689311049422}
+  m_PrefabAsset: {fileID: 0}

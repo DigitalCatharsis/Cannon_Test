@@ -8,26 +8,9 @@ namespace Cannon_Test
         [Inject] private LevelLogic _levelLogic;
         [Inject] private SoundManager _soundManager;
 
-        //public delegate void FreezeHandler();
-        //public event FreezeHandler? NotifyFreeze;
-
-        //public void Invoke_FreezeStatusChanged()
-        //{
-        //    NotifyFreeze.Invoke();
-        //}
-
-        //public void SubscribeToPowerUp(PowerUpControl powerUp, PowerUpType type)
-        //{
-        //    powerUp.OnInvokePowerUp += ExecutePowerUp;
-        //}
-        //public void UnsubscribeFromPowerUp(PowerUpControl powerUp, PowerUpType type)
-        //{
-        //    powerUp.OnInvokePowerUp -= ExecutePowerUp;
-        //}
-
         public void ExecutePowerUp(PowerUpControl powerUp)
         {
-            _soundManager.PlaySound(AudioSourceType.POWERUP,false,powerUp._powerUpType);
+            _soundManager.PlayCustomSound(AudioSourceType.POWERUP, 0, false, powerUp._powerUpType);
             EnemyControl[] enemiesControlls = FindObjectsOfType<EnemyControl>();
 
             switch (powerUp._powerUpType)
@@ -52,6 +35,13 @@ namespace Cannon_Test
                                 enemy.OnGotHit(instaKill: true);
                             }
                         }
+                        break;
+                    }
+                case PowerUpType.HeavyMachineGun:
+                    {
+                        _levelLogic.heaveMachineGun = true;
+                        _soundManager.PlayCustomSound(AudioSourceType.LEVEL_MUSIC,2,false);
+                        _levelLogic.IncreaseAttackDamageBonus(2);
                         break;
                     }
             }            

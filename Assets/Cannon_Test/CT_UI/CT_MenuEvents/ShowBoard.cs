@@ -13,14 +13,11 @@ namespace Cannon_Test
         [SerializeField] private bool _makeItPitched = false;
 
         public void ShowBoardFunc()
-        {            
+        {
             _soundManager.DisableAllAudioSourceExceptThisOne(_audioSourceType);
-            _boardToOpen.gameObject.SetActive(true);
-            if (_audioSourceType != null)
-            {
-                _soundManager.PlaySound(_audioSourceType, _makeItPitched);
-            }
-            _boardToDisable.gameObject.SetActive(false);
+            _boardToOpen.SetActive(true);
+            _soundManager.PlayRandomSound(_audioSourceType, _makeItPitched);
+            _boardToDisable.SetActive(false);
         }
     }
 }

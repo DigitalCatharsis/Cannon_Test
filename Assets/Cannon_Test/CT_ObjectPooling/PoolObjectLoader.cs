@@ -25,13 +25,13 @@ namespace Cannon_Test
 
         public GameObject InstantiateEnemyPrefab(EnemyType poolObjectType, Vector3 position, Quaternion rotation)
         {
-                return _enemyFactory.AddToPool(poolObjectType, position, rotation);
+            return _enemyFactory.AddToPool(poolObjectType, position, rotation);
         }
 
         public GameObject InstantiatePowerUpPrefab(PowerUpType poolObjectType, Vector3 position, Quaternion rotation)
         {
             return _powerUpFactory.AddToPool(poolObjectType, position, rotation);
-        }        
+        }
         public GameObject InstantiateProjectilePrefab(ProjectileType poolObjectType, Vector3 position, Quaternion rotation)
         {
             return _projectileFactory.AddToPool(poolObjectType, position, rotation);

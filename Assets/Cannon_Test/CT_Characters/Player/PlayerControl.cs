@@ -1,4 +1,6 @@
 using Cannon_Test;
+using System.Collections;
+using System.Threading;
 using UnityEngine;
 using Zenject;
 
@@ -15,36 +17,64 @@ public class PlayerControl : MonoBehaviour
     [Header("Shooting")]
     public Transform _cannonBallSpawnPoint;
     public ProjectileType cannonBallType;
-    public float cannonBallSpeed;
-    public float cannonBallAttackDamage;
+    public float cannonBallSpeed = 5000;
+    [SerializeField] private int _cannonBallAttackDamage = 1;
+
+    [SerializeField] private float _shootDelay = 0.1f;
+    private float _timer;
+
+    public int CannonBallAttackDamage { get => _cannonBallAttackDamage + _levelLogic.AttackDamageBonus; private set => _cannonBallAttackDamage = value; }
 
     //Я не стал писать InputManager для контроллеров, потому что сомневаюсь, что игра будет расширяться, ну как минимум в ТЗ об этом не говорилось.
     //Но если бы пришлось, думаю я бы сделал KeyboadInput.cs, VirtualInputManager, и уже с VirtualInputManager брал бы значения ака IsShooting и тд...
 
-    public delegate void ShootingHandler();
-    public event ShootingHandler? OnShooting;
-
     private void Update()
     {
+        _timer += Time.deltaTime;
         if (!_levelLogic.IsOnMenu && !_levelLogic.isGameOver)
         {
             RotatePlayerActor();
-
             Shoot();
         }
     }
     private void Shoot()
     {
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (!_levelLogic.heaveMachineGun)
         {
-            OnShooting?.Invoke();
-            _soundManager.PlaySound(AudioSourceType.SHOOT);
-            //почему-то первый летит быстрее остальных???? WTF?
-            var cannonBall = _poolManager.GetObject(cannonBallType, _cannonBallSpawnPoint.transform.position, Quaternion.Euler(32, 90, -15));
-            cannonBall.SetActive(true);
-            cannonBall.GetComponent<Rigidbody>().velocity = _cannonBallSpawnPoint.transform.forward * cannonBallSpeed * Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Attack();
+            }
         }
+        else
+        {
+            if (_timer >= _shootDelay)
+            {
+                _timer = 0;
+                if (Input.GetKey(KeyCode.Mouse0))
+                {
+                    for (var i = 0; i < 3; i++)
+                    {
+                        Attack();
+                    }                    
+                }
+            }
+        }
+    }
+    private void Attack()
+    {
+        if (_levelLogic.heaveMachineGun)
+        {
+            _soundManager.PlayCustomSound(AudioSourceType.SHOOT, 13);
+        }
+        else
+        {
+            _soundManager.PlayRandomSound(AudioSourceType.SHOOT, false);
+        }
+        //почему-то первый летит быстрее остальных???? WTF?
+        var cannonBall = _poolManager.GetObject(cannonBallType, _cannonBallSpawnPoint.transform.position, Quaternion.Euler(32, 90, -15));
+        cannonBall.SetActive(true);
+        cannonBall.GetComponent<Rigidbody>().velocity = _cannonBallSpawnPoint.transform.forward * CannonBallAttackDamage * cannonBallSpeed * Time.deltaTime;
     }
 
     private void RotatePlayerActor()

@@ -97,9 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cannonBallSpawnPoint: {fileID: 5537561984222209655}
-  cannonBallType: 1
+  cannonBallType: 0
   cannonBallSpeed: 5000
-  cannonBallAttackDamage: 1
+  _cannonBallAttackDamage: 1
+  _shootDelay: 0.1
 --- !u!1 &3218523967381215075
 GameObject:
   m_ObjectHideFlags: 0

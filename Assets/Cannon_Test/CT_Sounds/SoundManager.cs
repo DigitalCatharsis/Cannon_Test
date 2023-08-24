@@ -10,7 +10,7 @@ namespace Cannon_Test
     public enum AudioSourceType
     {
         SHOOT,
-        MainMenuMUSIC,
+        LEVEL_MUSIC,
         POWERUP,
         HIT,
         PLAYER_DEATH,
@@ -20,11 +20,10 @@ namespace Cannon_Test
 
     public class SoundManager : MonoBehaviour
     {
-        [Inject] private PlayerControl _playerControl;
 
         [Header("Sound Collections")]
         [SerializeField] private SoundClipsCollection _shootingSounds;
-        [SerializeField] private SoundClipsCollection _mainMenuMusicSounds;
+        [SerializeField] private SoundClipsCollection _levelMusicSounds;
         [SerializeField] private SoundClipsCollection _powerUpSounds;
         [SerializeField] private SoundClipsCollection _hitSounds;
         [SerializeField] private SoundClipsCollection _playerDeathSounds;
@@ -32,7 +31,7 @@ namespace Cannon_Test
         [SerializeField] private SoundClipsCollection _leaderboardAudioSounds;
 
         [Header("AudioSources")]
-        [SerializeField] private AudioSource _mainMenuMusicAudioSource;
+        [SerializeField] private AudioSource _levelMusicAudioSource;
         [SerializeField] private AudioSource _shootAudioSource;
         [SerializeField] private AudioSource _powerUpAudioSource;
         [SerializeField] private AudioSource _hitAudioSource;
@@ -44,52 +43,50 @@ namespace Cannon_Test
             AudioClip audioClip = _powerUpSounds.audioClips.Find(x => x.name == powerUpType);
             _powerUpAudioSource.PlayOneShot(audioClip, 0.7F);
         }
-        public void PlaySound(AudioSourceType type, bool randomPitch = false, PowerUpType powerUpType = default)
+        public void PlayRandomSound(AudioSourceType type, bool randomPitch = false)
         {
             var audioSource = new AudioSource();
-            var audioClips = new SoundClipsCollection();
+            var audioClips = ScriptableObject.CreateInstance<SoundClipsCollection>();
+
             switch (type)
             {
                 case AudioSourceType.SHOOT:
                     {
                         audioSource = _shootAudioSource;
                         audioClips = _shootingSounds;
+                        if (randomPitch)
+                        {
+                            audioSource.pitch = (Random.Range(0.6f, 0.9f));
+                        }
+                        audioSource.PlayOneShot(GetRandomAudioClip(audioClips), audioSource.volume);
+                        return;
                     }
-                    break;
-                case AudioSourceType.MainMenuMUSIC:
+                case AudioSourceType.LEVEL_MUSIC:
                     {
-                        audioClips = _mainMenuMusicSounds;
-                        audioSource = _mainMenuMusicAudioSource;
-                    }
-                    break;
-                case AudioSourceType.POWERUP:
-                    {
-                        GetAndPlayPowerUpSound(powerUpType.ToString());
+                        audioClips = _levelMusicSounds;
+                        audioSource = _levelMusicAudioSource;
+                        audioSource.PlayOneShot(GetRandomAudioClip(audioClips), audioSource.volume);
                         return;
                     }
                 case AudioSourceType.HIT:
                     {
                         audioClips = _hitSounds;
                         audioSource = _hitAudioSource;
-                    }
-                    break;
-                case AudioSourceType.PLAYER_DEATH:
-                    {
-                        DisableAllAudioSourceExceptThisOne(AudioSourceType.PLAYER_DEATH);
-
-                        foreach (var elem in _playerDeathSounds.audioClips)
+                        if (randomPitch)
                         {
-                            _playerDeathAudioSource.PlayOneShot(elem, _playerDeathAudioSource.volume);
+                            audioSource.pitch = (Random.Range(0.6f, 0.9f));
                         }
+                        audioSource.PlayOneShot(GetRandomAudioClip(audioClips), audioSource.volume);
                         return;
                     }
+
                 case AudioSourceType.CREDITS:
                     {
                         audioClips = _creditsSounds;
                         audioSource = _creditsAudioSource;
                         if (randomPitch)
                         {
-                            audioSource.pitch = (Random.Range(0.6f, 1.0f));
+                            audioSource.pitch = (Random.Range(0.6f, 0.9f));
                         }
                         audioSource.clip = GetRandomAudioClip(audioClips);
                         audioSource.Play();
@@ -104,13 +101,54 @@ namespace Cannon_Test
                         return;
                     }
             }
-            if (randomPitch)
-            {
-                audioSource.pitch = (Random.Range(0.6f, 0.9f));
-            }
-            audioSource.PlayOneShot(GetRandomAudioClip(audioClips), audioSource.volume);
         }
 
+        public void PlayCustomSound(AudioSourceType type, int index = 0, bool randomPitch = false, PowerUpType powerUpType = default)
+        {
+            var audioSource = new AudioSource();
+            var audioClips = ScriptableObject.CreateInstance<SoundClipsCollection>();
+            switch (type)
+            {
+                case AudioSourceType.POWERUP:
+                    {
+                        GetAndPlayPowerUpSound(powerUpType.ToString());
+                        return;
+                    }
+                case AudioSourceType.PLAYER_DEATH:
+                    {
+                        DisableAllAudioSourceExceptThisOne(AudioSourceType.PLAYER_DEATH);
+
+                        foreach (var elem in _playerDeathSounds.audioClips)
+                        {
+                            _playerDeathAudioSource.PlayOneShot(elem, _playerDeathAudioSource.volume);
+                        }
+                        return;
+                    }
+                case AudioSourceType.LEVEL_MUSIC:
+                    {
+                        audioClips = _levelMusicSounds;
+                        audioSource = _levelMusicAudioSource;
+                        if (randomPitch)
+                        {
+                            audioSource.pitch = (Random.Range(0.6f, 0.9f));
+                        }
+                        audioSource.clip = GetCusomAudioClip(audioClips, index);
+                        audioSource.Play();
+                        return;
+                    }
+                case AudioSourceType.SHOOT:
+                    {
+                        audioSource = _shootAudioSource;
+                        audioClips = _shootingSounds;
+                        if (randomPitch)
+                        {
+                            audioSource.pitch = (Random.Range(0.6f, 0.9f));
+                        }
+                        audioSource.PlayOneShot(GetCusomAudioClip(audioClips, index), audioSource.volume);
+                        return;
+                    }
+            }
+        }
         public void DisableAllAudioSourceExceptThisOne(AudioSourceType audioType)
         {
             var audioSource = new AudioSource();
@@ -119,8 +157,8 @@ namespace Cannon_Test
                 case AudioSourceType.SHOOT:
                     audioSource = _shootAudioSource;
                     break;
-                case AudioSourceType.MainMenuMUSIC:
-                    audioSource = _mainMenuMusicAudioSource;
+                case AudioSourceType.LEVEL_MUSIC:
+                    audioSource = _levelMusicAudioSource;
                     break;
                 case AudioSourceType.POWERUP:
                     audioSource = _powerUpAudioSource;
@@ -156,6 +194,11 @@ namespace Cannon_Test
             var randomIndex = Random.Range(0, (clipsCollection.audioClips.Count - 1));
             var randomValue = clipsCollection.audioClips[randomIndex];
             return randomValue;
+        }
+        private AudioClip GetCusomAudioClip(SoundClipsCollection clipsCollection, int index)
+        {
+            var value = clipsCollection.audioClips[index];
+            return value;
         }
     }
 }

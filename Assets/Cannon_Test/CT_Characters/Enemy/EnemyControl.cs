@@ -38,25 +38,16 @@ namespace Cannon_Test
 
         [Inject] LevelLogic _levelLogic;
         [Inject] private SoundManager _soundManager;
-
-        //public delegate void EnemyHandler(EnemyControl enemyControl);
-        //public event EnemyHandler? OnEnemySpawned;
-        //public event EnemyHandler? OnEnemyKilled;
+        [Inject] private PlayerControl _playerControl;
 
         private void Awake()
         {
             _enemyPoolobject = GetComponent<EnemyPoolObject>();
             _animator = GetComponentInChildren<Animator>();
             _collider = GetComponentInChildren<Collider>();
-            _currentHealth = maxHealth;
+            _currentHealth = maxHealth + (int)Math.Round(_levelLogic.EnemyBonusHealth);
             _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
-
-            //SubscribeToPowerManager(_powerUpManager);
         }
-        //public void SubscribeToPowerManager(PowerUpManager powerUpManager)
-        //{
-        //    _powerUpManager.NotifyFreeze += OnFreezeStatusChanges;
-        //}
 
         public void OnFreezeStatusChanges()
         {
@@ -66,14 +57,14 @@ namespace Cannon_Test
 
         public void OnGotHit(bool instaKill = false)
         {
-            _soundManager.PlaySound(AudioSourceType.HIT, true);
+            _soundManager.PlayRandomSound(AudioSourceType.HIT, true);
 
             if (instaKill)
             {
                 OnGotKilled();
             }
 
-            _currentHealth -= 1;
+            _currentHealth -= _playerControl.CannonBallAttackDamage;
 
             if (_currentHealth <= 0)
             {
@@ -144,7 +135,7 @@ namespace Cannon_Test
                 _levelLogic.AddEnemyToCounterAndCheckLoseCondition();
                 //_levelLogic.SubscribeToEnemy(this);
                 //OnEnemySpawned(this);
-                _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed;
+                _animator.speed = _levelLogic.CurrentGlobalEnemyAnimatorSpeed + _levelLogic.EnemyBonusSpeed;
             }
         }
 
@@ -155,7 +146,7 @@ namespace Cannon_Test
                 isKilled = false;
                 GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
                 this.transform.position = _levelSpawner.GetRandomPosition(_levelSpawner.maxCoordinates, _levelSpawner.minCoordinates);
-                _currentHealth = maxHealth;
+                _currentHealth = maxHealth + (int)Math.Round(_levelLogic.EnemyBonusHealth);
                 _collider.enabled = true;
                 _enemyPoolobject.ReturnToPool();
                 _animator.runtimeAnimatorController = _deathAnimationManager.GetDefaultAnimator();

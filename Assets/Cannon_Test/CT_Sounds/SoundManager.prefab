@@ -519,7 +519,7 @@ GameObject:
   - component: {fileID: 1750252766}
   - component: {fileID: 1750252767}
   m_Layer: 0
-  m_Name: MusictAudioSource
+  m_Name: LevelMusictAudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -551,7 +551,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 280020269748306681, guid: 3eefc70e290e22c4aa07e52df4b9c80b, type: 2}
   m_audioClip: {fileID: 8300000, guid: 67fd34d18890c81439b25d41f1cad9e6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.03
+  m_Volume: 0.13
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -686,13 +686,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootingSounds: {fileID: 11400000, guid: df04d98ebeb242b4199b0eed088d5c3e, type: 2}
-  _mainMenuMusicSounds: {fileID: 11400000, guid: d6375cef3eb3020469cc9a5baf32bb7e, type: 2}
+  _levelMusicSounds: {fileID: 11400000, guid: d6375cef3eb3020469cc9a5baf32bb7e, type: 2}
   _powerUpSounds: {fileID: 11400000, guid: e8e2c94366c25434bb0375907c1ab93b, type: 2}
   _hitSounds: {fileID: 11400000, guid: afb5be899b61d084e9cf8fcd28cbfa22, type: 2}
   _playerDeathSounds: {fileID: 11400000, guid: a312e0201c9a0074d906f5c914dd6598, type: 2}
   _creditsSounds: {fileID: 11400000, guid: c558b32f257149e4783d2bcf7953db0c, type: 2}
   _leaderboardAudioSounds: {fileID: 11400000, guid: d3d3bebe35c109e4a829a785add42ac1, type: 2}
-  _mainMenuMusicAudioSource: {fileID: 1750252767}
+  _levelMusicAudioSource: {fileID: 1750252767}
   _shootAudioSource: {fileID: 1592758981}
   _powerUpAudioSource: {fileID: 1649279405}
   _hitAudioSource: {fileID: 1677280262952332935}

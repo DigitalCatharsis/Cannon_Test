@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Cannon_Test
 {
@@ -18,11 +19,23 @@ namespace Cannon_Test
 
         [Header("Bools")]
         public bool IsOnMenu;
-        public bool isGameOver;
+        public bool isGameOver = false;
+        public bool heaveMachineGun = false;
 
-        [Header("Etc")]
+        [Header("GameOver")]
         [SerializeField] private float _secondsUntillRestart = 8;
+        [SerializeField] private int _enemiesTillRestart = 10;
         [SerializeField] private string _mainMenuName = "S_MainMenu";
+
+        [Header("Diffult params")]
+        public float increaceDifficultyPeriod = 5;
+        [SerializeField] private float _enemyBonusHealth = 0;
+        [SerializeField] private float _enemyBonusSpeed = 0;
+        [SerializeField] private float _spawnSpeedReduceParapeter = 0;
+
+        [SerializeField] private int _attackDamageBonus = 0;
+
+
 
 
         public float CurrentGlobalEnemyAnimatorSpeed { get => _currentGlobalEnemyAnimatorSpeed; private set => _currentGlobalEnemyAnimatorSpeed = value; }
@@ -31,6 +44,31 @@ namespace Cannon_Test
         public float MaxGlobalFreezeTimer { get => _currentGlobalFreezeTime; private set => _currentGlobalFreezeTime = value; }
         public bool IsTimerFreezed { get => _isTimerFreezed; private set => _isTimerFreezed = false; }
         public int EnemyCount { get => _enemyCount; private set => EnemyCount = value; }
+        public float EnemyBonusHealth { get => _enemyBonusHealth; private set => _enemyBonusHealth = value; }
+        public float EnemyBonusSpeed { get => _enemyBonusSpeed; private set => _enemyBonusSpeed = value; }
+        public float SpawnSpeedReduceParapeter { get => _spawnSpeedReduceParapeter; private set => _spawnSpeedReduceParapeter = value; }
+        public int AttackDamageBonus { get => _attackDamageBonus;  private set => _attackDamageBonus = value; }
+
+        public void IncreaseAttackDamageBonus(int amount)
+        {
+            _attackDamageBonus = amount;
+        }
+
+        private void Start()
+        {
+            StartCoroutine(DifficultIncreaserCorutine());
+        }
+
+        IEnumerator DifficultIncreaserCorutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(increaceDifficultyPeriod);
+                _enemyBonusHealth += 0.1f;
+                _enemyBonusSpeed += 0.1f;
+                _spawnSpeedReduceParapeter += 0.04f;
+            }
+        }
 
         IEnumerator WaitAndGoToMenu()
         {
@@ -64,7 +102,7 @@ namespace Cannon_Test
         public void AddEnemyToCounterAndCheckLoseCondition()
         {
             _enemyCount++;
-            if(_enemyCount >= 10)
+            if(_enemyCount >= _enemiesTillRestart)
             {
                 isGameOver = true;
                 GameOverAndRestart();
@@ -75,19 +113,5 @@ namespace Cannon_Test
         {
             _enemyCount--;
         }
-
-
-        //public void PauseGame()
-        //{
-        //    Time.timeScale = 0;
-        //}
-        //public void ResumeGame()
-        //{
-        //    Time.timeScale = 1;
-        //}
-
-        //public delegate void GameOverHandler();
-        //public event GameOverHandler? GameOver;
-
     }
 }

@@ -1,9 +1,9 @@
 namespace Cannon_Test
 {
-        public enum PowerUpType
-        {
-            Blow,
-            FreezeTimer,
-        }
-
+    public enum PowerUpType
+    {
+        Blow,
+        FreezeTimer,
+        HeavyMachineGun,
+    }
 }

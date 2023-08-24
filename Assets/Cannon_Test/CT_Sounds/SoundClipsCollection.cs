@@ -8,6 +8,6 @@ namespace Cannon_Test
         "")]
     public class SoundClipsCollection : ScriptableObject
     {
-        public List<AudioClip> audioClips = new List<AudioClip>();
+        public List<AudioClip> audioClips;
     }
 }
