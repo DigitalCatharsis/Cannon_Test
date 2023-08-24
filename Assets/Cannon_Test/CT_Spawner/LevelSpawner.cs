@@ -18,7 +18,7 @@ namespace Cannon_Test
         public Vector3 minCoordinates = new Vector3(-10f, 0.50f, -0.9f);
         public Vector3 maxCoordinates = new Vector3(10, 0.50f, 3.81f);
 
-        [SerializeField] private float _minimalEnemySpawnTimer = 0.5f;
+        [SerializeField] private float _minimalEnemySpawnTimer = 1f;
 
         //courutine
         //uniTask?
@@ -36,7 +36,7 @@ namespace Cannon_Test
 
         private IEnumerator SpawnHeavyMachineGun()
         {
-            yield return new WaitForSeconds(GetRandomFloat(1f,60f));
+            yield return new WaitForSeconds(GetRandomFloat(30f,60f));
             var projectileObj = _poolManager.GetObject(PowerUpType.HeavyMachineGun, GetRandomPosition(minCoordinates, maxCoordinates), Quaternion.Euler(0, 90, 0));
             projectileObj.SetActive(true);
         }

@@ -1634,6 +1634,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6077542762086002942, guid: 9bfc33211bd5f514bb31383c8b672024, type: 3}
+      propertyPath: _minimalEnemySpawnTimer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7974816466188899428, guid: 9bfc33211bd5f514bb31383c8b672024, type: 3}
       propertyPath: m_Name
       value: LevelSpawner

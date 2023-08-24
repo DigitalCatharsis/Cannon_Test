@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace Cannon_Test
 {
@@ -35,9 +34,6 @@ namespace Cannon_Test
 
         [SerializeField] private int _attackDamageBonus = 0;
 
-
-
-
         public float CurrentGlobalEnemyAnimatorSpeed { get => _currentGlobalEnemyAnimatorSpeed; private set => _currentGlobalEnemyAnimatorSpeed = value; }
         public float DefaultGlobalEnemyAnimatorSpeed { get => _defaultGlobalEnemyAnimatorSpeed; private set => _defaultGlobalEnemyAnimatorSpeed = value; }
         public float CurrentGlobalFreezeTimer { get => _currentGlobalFreezeTime; private set => _currentGlobalFreezeTime = value; }
@@ -53,12 +49,10 @@ namespace Cannon_Test
         {
             _attackDamageBonus = amount;
         }
-
         private void Start()
         {
             StartCoroutine(DifficultIncreaserCorutine());
         }
-
         IEnumerator DifficultIncreaserCorutine()
         {
             while (true)
@@ -69,18 +63,15 @@ namespace Cannon_Test
                 _spawnSpeedReduceParapeter += 0.04f;
             }
         }
-
         IEnumerator WaitAndGoToMenu()
         {
             yield return new WaitForSeconds(_secondsUntillRestart);
             UnityEngine.SceneManagement.SceneManager.LoadScene(_mainMenuName);
         }
-
         public void GameOverAndRestart()
         {
             _deathUiGameObject.SetActive(true);
         }
-
         public void StartFreezeTimer()
         {
             _isTimerFreezed = true;
