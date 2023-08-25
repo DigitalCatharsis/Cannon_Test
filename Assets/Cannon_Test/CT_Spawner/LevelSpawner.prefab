@@ -45,6 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemySpawnTimer: 5
   _powerUpSpawnTimer: 10
-  minCoordinates: {x: -10, y: 0.5, z: -0.9}
-  maxCoordinates: {x: 10, y: 0.5, z: 3.81}
+  minCoordinates: {x: -7.72, y: 0.5, z: 1.31}
+  maxCoordinates: {x: 6.98, y: 0.5, z: 7.58}
   _minimalEnemySpawnTimer: 0.5
