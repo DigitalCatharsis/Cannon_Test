@@ -108,6 +108,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -772,6 +773,35 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      rick-astley-rickroll_23: 2932455336698431799
+      rick-astley-rickroll_21: 8945657100494246536
+      rick-astley-rickroll_27: 1600909463422299527
+      rick-astley-rickroll_0: 4575355412702842081
+      rick-astley-rickroll_5: 7113136487797903673
+      rick-astley-rickroll_3: -4626748391635592032
+      rick-astley-rickroll_22: -5707451966310941452
+      rick-astley-rickroll_25: 1914488517206468040
+      rick-astley-rickroll_10: -3335567319750415613
+      rick-astley-rickroll_12: -9051946544578150970
+      rick-astley-rickroll_7: 5653109815469104231
+      rick-astley-rickroll_17: -3945087064163308995
+      rick-astley-rickroll_20: -4902821267428126453
+      rick-astley-rickroll_14: 1969447049476908416
+      rick-astley-rickroll_19: 416823577038589099
+      rick-astley-rickroll_11: 3581832764616063208
+      rick-astley-rickroll_2: -8942881105434846015
+      rick-astley-rickroll_4: 1231826972482998137
+      rick-astley-rickroll_26: 1760875075859068091
+      rick-astley-rickroll_1: -5494177473971523535
+      rick-astley-rickroll_16: 1881196536852390478
+      rick-astley-rickroll_8: -7439405760283623856
+      rick-astley-rickroll_24: -7765587144245301319
+      rick-astley-rickroll_15: -3786081394944389666
+      rick-astley-rickroll_6: -3355017235037444739
+      rick-astley-rickroll_13: -4397948533800156182
+      rick-astley-rickroll_18: -1420980524071298218
+      rick-astley-rickroll_9: 557196034698021917
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
